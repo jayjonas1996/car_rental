@@ -14,7 +14,7 @@ namespace car_rental
         {
             string a = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename='";
             string b = Server.MapPath("\\App_Data\\Database1.mdf';Integrated Security=True");
-            Application["constr_microsoft"] = a + b; 
+            Application["constr_microsoft"] = a + b;  
         }
 
         protected void Session_Start(object sender, EventArgs e)
