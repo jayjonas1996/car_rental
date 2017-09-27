@@ -11,7 +11,15 @@ namespace car_rental
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
+            DateTime today = DateTime.Now;
+            int thisyear = today.Year;
+            int x=thisyear-18;
+            for (int i=0; i<42; i++)
+            {
+                DropDownList3.Items.Add(x+"");
+                x--;
+            }
         }
     }
 }
