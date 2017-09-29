@@ -30,19 +30,19 @@
                         <br />
                         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
 &nbsp;
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="RequiredFieldValidator"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="Required"></asp:RequiredFieldValidator>
                         <br />
                         <asp:Label ID="Label3" runat="server" Text="address*"></asp:Label>
                         <br />
                         <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
 &nbsp;
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="TextBox2"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Required" ControlToValidate="TextBox2"></asp:RequiredFieldValidator>
                         <br />
                         <asp:Label ID="Label4" runat="server" Text="email*"></asp:Label>
                         <br />
                         <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
 &nbsp;&nbsp;
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="TextBox3"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Required" ControlToValidate="TextBox3"></asp:RequiredFieldValidator>
                         <br />
                         <asp:Label ID="Label5" runat="server" Text="city"></asp:Label>
                         <br />
@@ -68,7 +68,7 @@
                         <br />
                         <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
 &nbsp;&nbsp;
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="TextBox6"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter 10 Digit Number" ControlToValidate="TextBox6"></asp:RegularExpressionValidator>
                         <br />
                         <asp:Label ID="Label9" runat="server" Text="pincode*"></asp:Label>
                         <br />
@@ -82,7 +82,7 @@
                         <br />
 &nbsp;<br />
                         <br />
-                        <asp:Button ID="Button1" runat="server" Text="Sign Up" />
+                        <asp:Button ID="Button1" runat="server" Text="Sign Up" OnClick="Button1_Click" />
                         <br />
                     </td>
                     <td>
