@@ -32,24 +32,25 @@ namespace car_rental
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void Button1_Click1(object sender, EventArgs e)
         {
-            string s1 = WebConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            string s1 = WebConfigurationManager.ConnectionStrings["conshivam"].ConnectionString;
             SqlConnection con = new SqlConnection();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
+            con.Open();
             cmd.CommandText = "insert into user_master values (@user_id,@name,@address,@email_id,@city,@state,@dob,@contact_no,@pincode,@,liscense)";
             //cmd.Parameters.AddWithValue("@user_id",);
-            cmd.Parameters.AddWithValue("@name",TextBox1.Text);
-            cmd.Parameters.AddWithValue("@address",TextBox2.Text);
-            cmd.Parameters.AddWithValue("@email_id",TextBox3.Text);
-            cmd.Parameters.AddWithValue("@city",TextBox4.Text);
-            cmd.Parameters.AddWithValue("@state",TextBox5.Text);
+            cmd.Parameters.AddWithValue("@name", TextBox1.Text);
+            cmd.Parameters.AddWithValue("@address", TextBox2.Text);
+            cmd.Parameters.AddWithValue("@email_id", TextBox3.Text);
+            cmd.Parameters.AddWithValue("@city", TextBox4.Text);
+            cmd.Parameters.AddWithValue("@state", TextBox5.Text);
             cmd.Parameters.AddWithValue("@dob", DropDownList1.Text + "-" + DropDownList2.Text + "-" + DropDownList3.Text);
             cmd.Parameters.AddWithValue("@contact_no", TextBox6.Text);
             cmd.Parameters.AddWithValue("@pincode", TextBox7.Text);
             cmd.Parameters.AddWithValue("@liscense", TextBox8.Text);
-            con.Open();
+            
             cmd.ExecuteNonQuery();
             con.Close();
             Response.Redirect("login.aspx");

@@ -7,7 +7,7 @@
     <title></title>
     <style type="text/css">
         .auto-style1 {
-            height: 537px;
+            height: 3px;
         }
         .auto-style2 {
             width: 100%;
@@ -68,7 +68,7 @@
                         <br />
                         <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
 &nbsp;&nbsp;
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter 10 Digit Number" ControlToValidate="TextBox6"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter 10 Digit Number" ControlToValidate="TextBox6" ForeColor="Red" ValidationExpression="^(\+91[\-\s]?)?(91)?[789]\d{9}$"></asp:RegularExpressionValidator>
                         <br />
                         <asp:Label ID="Label9" runat="server" Text="pincode*"></asp:Label>
                         <br />
@@ -80,9 +80,14 @@
                         <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
 &nbsp;&nbsp;
                         <br />
+                        <br />
+                        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click1" Text="Sing UP" />
+                        <br />
 &nbsp;<br />
                         <br />
-                        <asp:Button ID="Button1" runat="server" Text="Sign Up" OnClick="Button1_Click" />
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:conshivam %>" SelectCommand="SELECT * FROM [user_master]"></asp:SqlDataSource>
+                        <br />
+                        <br />
                         <br />
                     </td>
                     <td>
