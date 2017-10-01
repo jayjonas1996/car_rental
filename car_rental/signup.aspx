@@ -29,26 +29,27 @@
                         First Name<br />
                         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
 &nbsp;
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="Required"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="first name is Required">*</asp:RequiredFieldValidator>
                         <br />
                         Middle Name<br />
                         <asp:TextBox ID="TextBox10" runat="server"></asp:TextBox>
                         <br />
                         Last Name<br />
                         <asp:TextBox ID="TextBox11" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="last name is required" ControlToValidate="TextBox11">*</asp:RequiredFieldValidator>
                         <br />
                         <br />
-                        <asp:Label ID="Label3" runat="server" Text="address*"></asp:Label>
+                        <asp:Label ID="Label3" runat="server" Text="address"></asp:Label>
                         <br />
                         <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
 &nbsp;
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Required" ControlToValidate="TextBox2"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="address is Required" ControlToValidate="TextBox2">*</asp:RequiredFieldValidator>
                         <br />
-                        <asp:Label ID="Label4" runat="server" Text="email*"></asp:Label>
+                        <asp:Label ID="Label4" runat="server" Text="email"></asp:Label>
                         <br />
                         <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
 &nbsp;&nbsp;
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Required" ControlToValidate="TextBox3"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="email is Required" ControlToValidate="TextBox3">*</asp:RequiredFieldValidator>
                         <br />
                         <asp:Label ID="Label5" runat="server" Text="city"></asp:Label>
                         <br />
@@ -72,22 +73,24 @@
                         <br />
                         <asp:Label ID="Label8" runat="server" Text="contact number*"></asp:Label>
                         <br />
-                        <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBox6" Type="number"  runat="server"></asp:TextBox>
 &nbsp;&nbsp;
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter 10 Digit Number" ControlToValidate="TextBox6" ForeColor="Red" ValidationExpression="^(\+91[\-\s]?)?(91)?[789]\d{9}$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter 10 Digit Number" ControlToValidate="TextBox6" ForeColor="Red" ValidationExpression="^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$"></asp:RegularExpressionValidator>
                         <br />
-                        <asp:Label ID="Label9" runat="server" Text="pincode*"></asp:Label>
+                        <asp:Label ID="Label9" runat="server" Text="pincode"></asp:Label>
                         <br />
-                        <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="TextBox7" Type="number" runat="server"></asp:TextBox>
 &nbsp;&nbsp;
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="pincode is required" ControlToValidate="TextBox7">*</asp:RequiredFieldValidator>
                         <br />
-                        <asp:Label ID="Label10" runat="server" Text="Liscence no.*"></asp:Label>
+                        <asp:Label ID="Label10" runat="server" Text="Liscence no."></asp:Label>
                         <br />
                         <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
 &nbsp;&nbsp;
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="liscence number is required" ControlToValidate="TextBox8">*</asp:RequiredFieldValidator>
                         <br />
                         <br />
-                        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click1" Text="Sing UP" />
+                        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click1" Text="SIGN UP" />
                         <br />
 &nbsp;<br />
                         <br />
@@ -97,8 +100,42 @@
                         <br />
                     </td>
                     <td>
+                        <br />
+                        <asp:Label ID="Label11" runat="server" Text="Create Password"></asp:Label>
+                        <br />
+                        <asp:TextBox ID="TextBox12" type="password" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="password is required" ControlToValidate="TextBox12">*</asp:RequiredFieldValidator>
+                        <br />
+                        <asp:Label ID="Label12" runat="server"  Text="Reenter password"></asp:Label>
+                        <br />
+                        <asp:TextBox ID="TextBox13"  type="password" runat="server"></asp:TextBox>
+                        &nbsp;
+                        <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="TextBox12" ControlToValidate="TextBox13" ErrorMessage="Password doesn't match"></asp:CompareValidator>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                         <asp:ValidationSummary ID="ValidationSummary1" runat="server" Height="153px" Width="558px" />
                     </td>
+                </tr>
+                <tr>
+                    <td class="auto-style3">
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
                 </tr>
             </table>
             <br />
