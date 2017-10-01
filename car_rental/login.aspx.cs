@@ -22,7 +22,7 @@ namespace car_rental
 
         protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
         {
-            string s1 = WebConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            string s1 = WebConfigurationManager.ConnectionStrings["conshivam"].ConnectionString;
             SqlConnection con = new SqlConnection(s1);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
@@ -36,8 +36,12 @@ namespace car_rental
             {
                 FormsAuthentication.RedirectFromLoginPage(Login1.UserName, true);
             }
+            else
+            {
+                Response.Write("Unauthirised Person");
+            }
             con.Close();
-
+            
 
         }
         static string GetHash(MD5 my5, string input)
@@ -58,14 +62,6 @@ namespace car_rental
             else { return false; }
         }
 
-        protected void SqlDataSource1_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
-        {
-
-        }
-
-        protected void LoginView1_ViewChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

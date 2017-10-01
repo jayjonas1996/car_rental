@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Web.Configuration;
 using System.Web.Security;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace car_rental
 {
@@ -16,13 +17,12 @@ namespace car_rental
         {
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
 
-
             DateTime today = DateTime.Now;
             int thisyear = today.Year;
             int x=thisyear-18;
+
             for (int i=1; i<43; i++)
             {
-
                 if (i < 13)
                     DropDownList2.Items.Add(""+i);
                 if (i < 32)
@@ -35,22 +35,25 @@ namespace car_rental
         protected void Button1_Click1(object sender, EventArgs e)
         {
             string s1 = WebConfigurationManager.ConnectionStrings["conshivam"].ConnectionString;
-            SqlConnection con = new SqlConnection();
+            SqlConnection con = new SqlConnection(s1);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            con.Open();
-            cmd.CommandText = "insert into user_master values (@user_id,@name,@address,@email_id,@city,@state,@dob,@contact_no,@pincode,@,liscense)";
-            //cmd.Parameters.AddWithValue("@user_id",);
-            cmd.Parameters.AddWithValue("@name", TextBox1.Text);
-            cmd.Parameters.AddWithValue("@address", TextBox2.Text);
-            cmd.Parameters.AddWithValue("@email_id", TextBox3.Text);
-            cmd.Parameters.AddWithValue("@city", TextBox4.Text);
-            cmd.Parameters.AddWithValue("@state", TextBox5.Text);
-            cmd.Parameters.AddWithValue("@dob", DropDownList1.Text + "-" + DropDownList2.Text + "-" + DropDownList3.Text);
-            cmd.Parameters.AddWithValue("@contact_no", TextBox6.Text);
-            cmd.Parameters.AddWithValue("@pincode", TextBox7.Text);
-            cmd.Parameters.AddWithValue("@liscense", TextBox8.Text);
             
+            cmd.CommandText = "insert into user_master values (@user_id,@name,@address,@email_id,@city,@state,@dob,@contact_no,@pincode,@liscense_no)";
+
+            //cmd.Parameters.AddWithValue("@user_id",);
+            //string fullname = TextBox1.Text + TextBox10.Text + TextBox11.Text;
+
+            cmd.Parameters.AddWithValue("@name",TextBox1.Text + TextBox10.Text + TextBox11.Text);
+            cmd.Parameters.AddWithValue("@address",TextBox2.Text);
+            cmd.Parameters.AddWithValue("@email_id",TextBox3.Text);
+            cmd.Parameters.AddWithValue("@city",TextBox4.Text);
+            cmd.Parameters.AddWithValue("@state",TextBox5.Text);
+            cmd.Parameters.AddWithValue("@dob",DropDownList1.Text + "-" + DropDownList2.Text + "-" + DropDownList3.Text);
+            cmd.Parameters.AddWithValue("@contact_no",TextBox6.Text);
+            cmd.Parameters.AddWithValue("@pincode",TextBox7.Text);
+            cmd.Parameters.AddWithValue("@liscense_no",TextBox8.Text);
+            con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
             Response.Redirect("login.aspx");

@@ -26,11 +26,17 @@
             <table class="auto-style2">
                 <tr>
                     <td class="auto-style3">
-                        <asp:Label ID="Label2" runat="server" Text="Full Name*"></asp:Label>
-                        <br />
+                        First Name<br />
                         <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
 &nbsp;
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="Required"></asp:RequiredFieldValidator>
+                        <br />
+                        Middle Name<br />
+                        <asp:TextBox ID="TextBox10" runat="server"></asp:TextBox>
+                        <br />
+                        Last Name<br />
+                        <asp:TextBox ID="TextBox11" runat="server"></asp:TextBox>
+                        <br />
                         <br />
                         <asp:Label ID="Label3" runat="server" Text="address*"></asp:Label>
                         <br />

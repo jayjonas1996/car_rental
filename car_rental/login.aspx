@@ -11,13 +11,16 @@
         <asp:Login ID="Login1" runat="server" OnAuthenticate="Login1_Authenticate">
         </asp:Login>
         <br />
-        <asp:LoginView ID="LoginView1" runat="server" OnViewChanged="LoginView1_ViewChanged">
+        
+        <asp:LoginView ID="LoginView1" runat="server">
             <AnonymousTemplate>
-                Register yourself <a href = "signup.aspx" >Here</a>&nbsp;
+                SignUp?? <a href ="signup.aspx" >Here</a>
             </AnonymousTemplate>
         </asp:LoginView>
+        
         <br />
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:constrshivam %>" SelectCommand="SELECT * FROM [admin_login]"></asp:SqlDataSource>
+        <br />
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:conshivam %>" SelectCommand="SELECT * FROM [admin_login]"></asp:SqlDataSource>
         <br />
         <br />
     </form>
