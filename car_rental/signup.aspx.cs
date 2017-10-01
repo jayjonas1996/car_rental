@@ -39,12 +39,12 @@ namespace car_rental
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
             
-            cmd.CommandText = "insert into user_master values (@user_id,@name,@address,@email_id,@city,@state,@dob,@contact_no,@pincode,@liscense_no)";
+            cmd.CommandText = "insert into user_master (name,address,email_id,city,state,dob,contact_no,pincode,liscense_no) values (@name,@address,@email_id,@city,@state,@dob,@contact_no,@pincode,@liscense_no)";
 
             //cmd.Parameters.AddWithValue("@user_id",);
             //string fullname = TextBox1.Text + TextBox10.Text + TextBox11.Text;
 
-            cmd.Parameters.AddWithValue("@name",TextBox1.Text + TextBox10.Text + TextBox11.Text);
+            cmd.Parameters.AddWithValue("@name",TextBox1.Text + " " + TextBox10.Text + " " + TextBox11.Text);
             cmd.Parameters.AddWithValue("@address",TextBox2.Text);
             cmd.Parameters.AddWithValue("@email_id",TextBox3.Text);
             cmd.Parameters.AddWithValue("@city",TextBox4.Text);

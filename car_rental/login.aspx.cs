@@ -32,14 +32,11 @@ namespace car_rental
             rdr = cmd.ExecuteReader();
             rdr.Read();
 
-            if(rdr["passhash"].ToString()==Login1.Password)
+            if (rdr["passhash"].ToString()==Login1.Password)//error here for anonymous user
             {
                 FormsAuthentication.RedirectFromLoginPage(Login1.UserName, true);
             }
-            else
-            {
-                Response.Write("Unauthirised Person");
-            }
+            
             con.Close();
             
 

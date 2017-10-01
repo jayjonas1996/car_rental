@@ -83,6 +83,7 @@
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
     <Content Include="signup.aspx" />
+    <Content Include="unauth.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +111,13 @@
     </Compile>
     <Compile Include="signup.aspx.designer.cs">
       <DependentUpon>signup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="unauth.aspx.cs">
+      <DependentUpon>unauth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="unauth.aspx.designer.cs">
+      <DependentUpon>unauth.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <PropertyGroup>
