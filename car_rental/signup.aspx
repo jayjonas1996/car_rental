@@ -31,9 +31,6 @@
 &nbsp;
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1" ErrorMessage="first name is Required">*</asp:RequiredFieldValidator>
                         <br />
-                        Middle Name<br />
-                        <asp:TextBox ID="TextBox10" runat="server"></asp:TextBox>
-                        <br />
                         Last Name<br />
                         <asp:TextBox ID="TextBox11" runat="server"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="last name is required" ControlToValidate="TextBox11">*</asp:RequiredFieldValidator>

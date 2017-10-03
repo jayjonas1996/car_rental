@@ -45,7 +45,8 @@ namespace car_rental
             cmd.Connection = con;
 
             //CHECK IF EMAIL ALREADY EXISTS
-            cmd.CommandText = "select count(*) from user_master where email_id='" + TextBox3.Text + "'";
+            cmd.CommandText = "select count(*) from user_master where email_id=@email";
+            cmd.Parameters.AddWithValue("@email", TextBox3.Text);
             con.Open();
             int count = (int)cmd.ExecuteScalar();
             con.Close();
@@ -54,6 +55,7 @@ namespace car_rental
             {
 
                 //CREATE USER
+                cmd.Parameters.Clear();
                 cmd.CommandText = "insert into user_master (name,address,email_id,city,state,dob,contact_no,pincode,liscense_no) values (@name,@address,@email_id,@city,@state,@dob,@contact_no,@pincode,@liscense_no)";
 
                 string fullname = TextBox1.Text + TextBox11.Text;
@@ -75,7 +77,8 @@ namespace car_rental
                 cmd.Parameters.Clear();
 
                 //create login for user
-                cmd.CommandText = "select user_id from user_master where email_id='" + TextBox3.Text + "'";
+                cmd.CommandText = "select user_id from user_master where email_id=@email";
+                cmd.Parameters.AddWithValue("@email", TextBox3.Text);
 
                 con.Open();
                 int user = (int)cmd.ExecuteScalar();

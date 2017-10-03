@@ -26,7 +26,8 @@ namespace car_rental
             SqlConnection con = new SqlConnection(s1);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "select passhash from admin_login where name ='" + Login1.UserName + "'";
+            cmd.CommandText = "select passhash from admin_login where name =@username";
+            cmd.Parameters.AddWithValue("@username", Login1.UserName);
             SqlDataReader rdr;
             con.Open();
             rdr = cmd.ExecuteReader();
