@@ -15,6 +15,8 @@ namespace car_rental
 {
     public partial class login : System.Web.UI.Page
     {
+        MD5 my5 = MD5.Create();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
@@ -26,21 +28,58 @@ namespace car_rental
             SqlConnection con = new SqlConnection(s1);
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = con;
-            cmd.CommandText = "select passhash from admin_login where name =@username";
-            cmd.Parameters.AddWithValue("@username", Login1.UserName);
-            SqlDataReader rdr;
+
+
+            string hash = GetHash(my5, Login1.Password);
+
+
+            cmd.CommandText = "select count(*) from user_login where username = @username and passhash = @passhash";
+            cmd.Parameters.AddWithValue("@username", Login1.UserName.ToLower());
+            cmd.Parameters.AddWithValue("@passhash", hash);
+
             con.Open();
-            rdr = cmd.ExecuteReader();
-            rdr.Read();
-
-            if (rdr["passhash"].ToString()==Login1.Password)//error here for anonymous user
-            {
-                FormsAuthentication.RedirectFromLoginPage(Login1.UserName, true);
-            }
-            
+            int exist = (int)cmd.ExecuteScalar();
             con.Close();
-            
+            cmd.Parameters.Clear();
+            if (exist == 0)
+            {
 
+                cmd.CommandText = "select count(*) from admin_login where name =@username";
+                cmd.Parameters.AddWithValue("@username", Login1.UserName);
+                con.Open();
+                int admin_exists = (int)cmd.ExecuteScalar();
+                con.Close();
+                cmd.Parameters.Clear();
+                if(admin_exists !=0)
+                {
+                    cmd.CommandText = "select passhash from admin_login where name =@username";
+                    cmd.Parameters.AddWithValue("@username", Login1.UserName);
+                    SqlDataReader rdr;
+                    con.Open();
+                    rdr = cmd.ExecuteReader();
+                    rdr.Read();
+                    rdr["passhash"].ToString();
+                    if (rdr["passhash"].ToString() == Login1.Password)//error here for anonymous user
+                    {
+                        con.Close();
+                        FormsAuthentication.RedirectFromLoginPage(Login1.UserName, true);           //LOGGING IN ADMIN
+                    }
+                    else
+                    {
+                        con.Close();
+                        ClientScript.RegisterStartupScript(this.GetType(), "fail", "alert('incorrect login');", true);
+                    }
+                }
+                try
+                {
+                    con.Close();
+                }
+                catch { }
+            }
+            else
+            {
+                FormsAuthentication.RedirectFromLoginPage(Login1.UserName.ToLower(), true);         //LOGGING IN USER
+            }
         }
         static string GetHash(MD5 my5, string input)
         {

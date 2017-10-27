@@ -35,6 +35,11 @@
                         <asp:TextBox ID="TextBox11" runat="server"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="last name is required" ControlToValidate="TextBox11">*</asp:RequiredFieldValidator>
                         <br />
+                        <asp:Label ID="Label13" runat="server" Text="Username"></asp:Label>
+                        <br />
+                        <asp:TextBox ID="TextBox14" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="TextBox14" ErrorMessage="Username required">*</asp:RequiredFieldValidator>
+                        <br />
                         <br />
                         <asp:Label ID="Label3" runat="server" Text="address"></asp:Label>
                         <br />
@@ -112,6 +117,7 @@
                         <br />
                         <br />
                         <br />
+                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="login.aspx">Go to Login</asp:HyperLink>
                         <br />
                         <br />
                         <br />

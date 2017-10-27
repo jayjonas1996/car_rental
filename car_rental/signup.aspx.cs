@@ -41,36 +41,60 @@ namespace car_rental
             //DECLARATIONS
             SqlConnection con = new SqlConnection(s1);
             SqlCommand cmd = new SqlCommand();
-            SqlDataReader reader;
+            //SqlDataReader reader;
             cmd.Connection = con;
 
             //CHECK IF EMAIL ALREADY EXISTS
-            cmd.CommandText = "select count(*) from user_master where email_id=@email";
-            cmd.Parameters.AddWithValue("@email", TextBox3.Text);
-            con.Open();
-            int count = (int)cmd.ExecuteScalar();
-            con.Close();
+            cmd.CommandText = "createnewuser";
+            cmd.CommandType = CommandType.StoredProcedure;
+            
 
-            if (count == 0)
-            {
+           
 
                 //CREATE USER
                 cmd.Parameters.Clear();
-                cmd.CommandText = "insert into user_master (name,address,email_id,city,state,dob,contact_no,pincode,liscense_no) values (@name,@address,@email_id,@city,@state,@dob,@contact_no,@pincode,@liscense_no)";
+                string hash = GetHash(my5, TextBox13.Text);
 
-                string fullname = TextBox1.Text + TextBox11.Text;
+                string fullname = TextBox1.Text +" "+ TextBox11.Text;
 
                 cmd.Parameters.AddWithValue("@name", fullname);
                 cmd.Parameters.AddWithValue("@address", TextBox2.Text);
-                cmd.Parameters.AddWithValue("@email_id", TextBox3.Text);
+                cmd.Parameters.AddWithValue("@email_id", TextBox3.Text.ToLower());
+                cmd.Parameters.AddWithValue("@username",TextBox14.Text.ToLower());
                 cmd.Parameters.AddWithValue("@city", TextBox4.Text);
                 cmd.Parameters.AddWithValue("@state", TextBox5.Text);
                 cmd.Parameters.AddWithValue("@dob", DropDownList1.Text + "-" + DropDownList2.Text + "-" + DropDownList3.Text);
                 cmd.Parameters.AddWithValue("@contact_no", TextBox6.Text);
                 cmd.Parameters.AddWithValue("@pincode", TextBox7.Text);
-                cmd.Parameters.AddWithValue("@liscense_no", TextBox8.Text);
+                cmd.Parameters.AddWithValue("@license_no", TextBox8.Text);
+                cmd.Parameters.AddWithValue("@passhash",hash);
 
+                var output_id = new SqlParameter();
+                output_id.ParameterName = "@id";
+                output_id.SqlDbType = SqlDbType.Int;
+                output_id.Direction = ParameterDirection.Output;
 
+                cmd.Parameters.Add(output_id);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                string id = output_id.Value.ToString();
+                int int_id;
+                try { int_id = int.Parse(id); }
+                catch { int_id = 0; }
+
+                if (int_id != 0 )
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "success", "alert('USER CREATED');", true);
+                    //Response.Redirect("login.aspx");
+                }
+                else
+                {
+                ClientScript.RegisterStartupScript(this.GetType(), "exist", "alert('THE USERNAME OR EMAIL ALREADY EXIST PLEASE TRY ANOTHE ONE');", true);
+                }
+                /*
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -94,14 +118,11 @@ namespace car_rental
                 con.Open();
                 cmd.ExecuteNonQuery();
                 con.Close();
+                */
 
 
                 //Response.Redirect("login.aspx");
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(this.GetType(), "Email exist", "alert('The email you're trying to register with is already associated with a existing user please use a different email');", true);
-            }
+            
         }
 
 
