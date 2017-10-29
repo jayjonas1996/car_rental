@@ -72,6 +72,7 @@
   <ItemGroup>
     <Content Include="catalogue.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="files\vimg\TextFile1.txt" />
     <Content Include="Global.asax" />
     <Content Include="login.aspx" />
     <Content Include="manage_vehicles.aspx" />
@@ -150,7 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
-    <Folder Include="files\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
