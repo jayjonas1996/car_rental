@@ -8,7 +8,7 @@
     <title></title>
     <style type="text/css">
         .auto-style1 {
-            height: 256px;
+            height: 174px;
         }
         .modalBackground
     {
@@ -28,9 +28,25 @@
         width: 430px;
         height: 270px;
     }
+        .auto-style2 {
+            width: 1100px;
+            height: 377px;
+        }
+        .vehiclebutton {
+            position: relative;
+            left: 850px;
+           
+
+        }
+        .auto-style3 {
+            position: absolute;
+            right: 623px;
+            top: 228px;
+            margin-bottom: 0px;
+        }
     </style>
 </head>
-<body style="height: 430px">
+<body style="height: 669px">
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div class="auto-style1">
@@ -38,6 +54,9 @@
             <br />
             <br />
             <asp:Button ID="newmodelbtn" runat="server" Text="New Model" Width="80px" />
+            
+            <asp:Button ID="add_vehicle" runat="server" CssClass="vehiclebutton" Text="Button" Visible="False" />
+            
         </div>
 
 
@@ -57,6 +76,38 @@
         <asp:FileUpload runat="server" id="fileupload_vimg" />                                                                                      <br/>
             <asp:Button ID="btnClose" runat="server" Text="Close" /> <asp:Button ID="savebtn" runat="server" Text="save" oncommand="savebtn_Command"/>
         </asp:Panel>
+
+
+        <ajaxtoolkit:ModalPopupExtender ID="mp2" runat="server" PopupControlID="Panel2" TargetControlID="add_vehicle"
+    CancelControlID="close" BackgroundCssClass="modalBackground">
+</ajaxtoolkit:ModalPopupExtender>
+
+
+        <asp:Panel ID="Panel2" runat="server" CssClass="modalPopup" HorizontalAlign="Center" style="display:none">
+            <h4>Add another</h4>
+            <asp:Label id="Label2" runat="server" Text="Vehicle ID:" />&nbsp&nbsp&nbsp<asp:Label id="Label3" runat="server" Text=" :" />              <br/>
+            <asp:Label id="Label10" runat="server" Text="Vehicle Name:" />&nbsp&nbsp&nbsp<asp:Label id="Label11" runat="server" Text=" :" />              <br/>
+            <asp:Label id="Label4" runat="server" Text="availability:" />  &nbsp&nbsp&nbsp    <asp:DropDownList runat="server" ID="dropdown_yn">  <asp:ListItem Selected="True">Y</asp:ListItem>
+              <asp:ListItem>N</asp:ListItem>   </asp:DropDownList>                    <br/>
+            <asp:Label id="Label5" runat="server" Text="Status" />   &nbsp&nbsp&nbsp   <asp:Textbox ID="Textbox1" runat="server" /> &nbsp<asp:Label id="Label6" runat="server" Text="leave blank if above option is Y" />                                 <br/>
+            <asp:Label id="Label7" runat="server" Text="initial kilometer readings" />   &nbsp&nbsp&nbsp <asp:Textbox ID="Textbox2" runat="server" Type="number" />                                                             <br/>
+        <asp:Label id="Label8" runat="server" Text="Registration Number" />           <asp:Textbox ID="Textbox3" runat="server" />        <asp:Label runat="server" ID="Label9" Text="eg. XX01YY1234" />                        <br/>
+            <asp:Button ID="close" runat="server" Text="Close" /> <asp:Button ID="insert_vehicle" runat="server" OnClick="insert_vehicle_Click" Text="Insert" />
+            </asp:Panel>
+
+
+        <div class="auto-style2">
+            <br />
+            <asp:Table ID="Table1" runat="server">
+            </asp:Table>
+            
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+            <asp:Table ID="Table2" runat="server" HorizontalAlign="Right" Visible="False" BorderStyle="Solid" BorderWidth="2px" GridLines="Both">
+            </asp:Table>
+            
+        </div>
+        
     </form>
 </body>
 </html>
