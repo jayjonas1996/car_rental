@@ -22,7 +22,7 @@ namespace car_rental
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("select group_id,vehicle_name,count(availability) from vehicle_master group by group_id,vehicle_name,availability", con);
+            SqlCommand cmd = new SqlCommand("select group_id,vehicle_name,count(availability),charges,fuel_type,seats from vehicle_master group by group_id,vehicle_name,availability,fuel_type,seats,charges", con);
             DataTable group_table = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
 
@@ -73,7 +73,25 @@ namespace car_rental
                 cell_3_1.Text = "Total: " + group_table.Rows[i][2].ToString();
                 row_3.Cells.Add(cell_3_1);
 
-                //Row for uploading more images
+                //Row to display number of seats
+                var row_7 = new TableRow();
+                var cell_7_1 = new TableCell();
+                cell_7_1.Text = "Charges Amount: " + group_table.Rows[i][3].ToString();
+                row_7.Cells.Add(cell_7_1);
+
+                //Row to display fuel type
+                var row_8 = new TableRow();
+                var cell_8_1 = new TableCell();
+                cell_8_1.Text = group_table.Rows[i][4].ToString();
+                row_8.Cells.Add(cell_8_1);
+
+                //Row to display  seats
+                var row_9 = new TableRow();
+                var cell_9_1 = new TableCell();
+                cell_9_1.Text = group_table.Rows[i][2].ToString()+" Seater";
+                row_9.Cells.Add(cell_9_1);
+
+                //Row for uploading more images button
                 var row_4 = new TableRow();
                 var cell_4_1 = new TableCell();
                 var btn_1 = new Button();
@@ -108,6 +126,9 @@ namespace car_rental
                 Table1.Rows.Add(row_1);
                 Table1.Rows.Add(row_2);
                 Table1.Rows.Add(row_3);
+                Table1.Rows.Add(row_7);
+                Table1.Rows.Add(row_8);
+                Table1.Rows.Add(row_9);
                 Table1.Rows.Add(row_4);
                 Table1.Rows.Add(row_5);
                 Table1.Rows.Add(row_6);
@@ -117,12 +138,7 @@ namespace car_rental
         protected void savebtn_Command(object sender, CommandEventArgs e)
         {
 
-
-
-
-
-
-            if (t1.Text != "" && t2.Text != "" && t3.Text != "" && t4.Text != "" && fileupload_vimg.HasFile)
+            if (t1.Text != "" && t2.Text != "" && t3.Text != "" && t4.Text != "" && Textbox4.Text !="" && fileupload_vimg.HasFile)
             {
 
                 var FileExtension = Path.GetExtension(fileupload_vimg.PostedFile.FileName).Substring(1);
@@ -137,7 +153,7 @@ namespace car_rental
 
 
 
-                    var cmd = new SqlCommand("insert into vehicle_master (group_id,vehicle_name,availability,vehicle_status,kms_used,registration_no) values(@group_id,@vehicle_name,@availability,@vehicle_status,@kms_used,@registration_no)", con);
+                    var cmd = new SqlCommand("insert into vehicle_master (group_id,vehicle_name,availability,vehicle_status,kms_used,fuel_type,seats,charges,registration_no) values(@group_id,@vehicle_name,@availability,@vehicle_status,@kms_used,@fuel_type,@seats,@charges,@registration_no)", con);
 
                     cmd.Parameters.AddWithValue("@group_id", t1.Text.ToString());
                     cmd.Parameters.AddWithValue("@vehicle_name", t2.Text.ToString());
@@ -154,6 +170,17 @@ namespace car_rental
                     cmd.Parameters.AddWithValue("@kms_used", int.Parse(t3.Text));
                     cmd.Parameters.AddWithValue("@registration_no", t4.Text.ToString());
 
+                    if (RadioButton1.Checked == true)
+                    {
+                        cmd.Parameters.AddWithValue("@fuel_type", "Petrol");
+                    }
+                    else if (RadioButton2.Checked == true)
+                    {
+                        cmd.Parameters.AddWithValue("@seats","Diesel");
+                    }
+
+                    cmd.Parameters.AddWithValue("@seats",seats_list.SelectedValue);
+                    cmd.Parameters.AddWithValue("@charges",Textbox4.Text);
                     con.Open();
                     int inserted = cmd.ExecuteNonQuery();
                     con.Close();

@@ -72,6 +72,22 @@
         <asp:Label id="l2" runat="server" Text="Name:" />                         <asp:Textbox ID="t2" runat="server" />                         <br/>
         <asp:Label runat="server" ID="l3" Text="available?"/>                     <asp:CheckBox runat="server"  ID="yncheckbox"/>                <br/>
         <asp:Label runat="server" ID="l4" Text="kilometers used?"  />             <asp:Textbox runat="server" ID="t3" type="number"/>            <br/>
+       <asp:Label runat="server" ID="Label12" Text="Fuel Type"  />     <asp:RadioButton ID="RadioButton1" runat="server"  GroupName="f" Text="petrol" Checked="True" />
+          <asp:RadioButton ID="RadioButton2" runat="server" GroupName="f" Text="diesel" />  <br/>
+            <asp:DropDownList ID="seats_list" runat="server" >
+            <asp:ListItem Selected="True">2</asp:ListItem>
+            <asp:ListItem>3</asp:ListItem>
+            <asp:ListItem>4</asp:ListItem>
+            <asp:ListItem>5</asp:ListItem>
+                <asp:ListItem>6</asp:ListItem>
+            <asp:ListItem>7</asp:ListItem>
+                <asp:ListItem>8</asp:ListItem>
+            <asp:ListItem>9</asp:ListItem>
+                <asp:ListItem>10</asp:ListItem>
+            <asp:ListItem>11</asp:ListItem>
+                 <asp:ListItem>12</asp:ListItem>
+        </asp:DropDownList>                                                         <br/>
+            <asp:Label runat="server" ID="Label13" Text="Charge amount:"  />             <asp:Textbox runat="server" ID="Textbox4" type="number"/>            <br/>
         <asp:Label id="l5" runat="server" Text="Registration Number" />           <asp:Textbox ID="t4" runat="server" />        <asp:Label runat="server" ID="l6" Text="eg. XX01YY1234" />      <br/>
         <asp:FileUpload runat="server" id="fileupload_vimg" />                                                                                      <br/>
             <asp:Button ID="btnClose" runat="server" Text="Close" /> <asp:Button ID="savebtn" runat="server" Text="save" oncommand="savebtn_Command"/>
