@@ -46,10 +46,15 @@ namespace car_rental
             if (exist == 0)
             {
 
-                cmd.CommandText = "select count(*) from admin_login where name =@username";
+                cmd.CommandText = "select admin_id from admin_login where name =@username";
                 cmd.Parameters.AddWithValue("@username", Login1.UserName);
+                int admin_exists = 0;
                 con.Open();
-                int admin_exists = (int)cmd.ExecuteScalar();
+                try
+                { admin_exists = (int)cmd.ExecuteScalar(); }
+                catch
+                { admin_exists = 0; }
+                
                 con.Close();
                 cmd.Parameters.Clear();
                 if(admin_exists !=0)
@@ -64,6 +69,7 @@ namespace car_rental
                     if (rdr["passhash"].ToString() == Login1.Password)//error here for anonymous user
                     {
                         con.Close();
+                        Session["admin_id"] = admin_exists;
                         FormsAuthentication.RedirectFromLoginPage(Login1.UserName, true);           //LOGGING IN ADMIN
                     }
                     else
