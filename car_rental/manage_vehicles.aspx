@@ -26,7 +26,7 @@
         padding-top: 10px;
         padding-left: 10px;
         width: 430px;
-        height: 270px;
+        height: 370px;
     }
         .auto-style2 {
             width: 1100px;
@@ -74,7 +74,7 @@
         <asp:Label runat="server" ID="l4" Text="kilometers used?"  />             <asp:Textbox runat="server" ID="t3" type="number"/>            <br/>
        <asp:Label runat="server" ID="Label12" Text="Fuel Type"  />     <asp:RadioButton ID="RadioButton1" runat="server"  GroupName="f" Text="petrol" Checked="True" />
           <asp:RadioButton ID="RadioButton2" runat="server" GroupName="f" Text="diesel" />  <br/>
-            <asp:DropDownList ID="seats_list" runat="server" >
+         <asp:Label runat="server" ID="seats" Text="number of seats; "  />   <asp:DropDownList ID="seats_list" runat="server" >
             <asp:ListItem Selected="True">2</asp:ListItem>
             <asp:ListItem>3</asp:ListItem>
             <asp:ListItem>4</asp:ListItem>
@@ -103,6 +103,7 @@
             <h4>Add another</h4>
             <asp:Label id="Label2" runat="server" Text="Vehicle ID:" />&nbsp&nbsp&nbsp<asp:Label id="Label3" runat="server" Text=" :" />              <br/>
             <asp:Label id="Label10" runat="server" Text="Vehicle Name:" />&nbsp&nbsp&nbsp<asp:Label id="Label11" runat="server" Text=" :" />              <br/>
+            <asp:Label id="Label_seats" runat="server" Text="___" />&nbsp&nbsp <asp:Label id="Label_charges" runat="server" Text="___" /> &nbsp&nbsp<asp:Label id="Label_type" runat="server" Text="____" />        <br/>
             <asp:Label id="Label4" runat="server" Text="availability:" />  &nbsp&nbsp&nbsp    <asp:DropDownList runat="server" ID="dropdown_yn">  <asp:ListItem Selected="True">Y</asp:ListItem>
               <asp:ListItem>N</asp:ListItem>   </asp:DropDownList>                    <br/>
             <asp:Label id="Label5" runat="server" Text="Status" />   &nbsp&nbsp&nbsp   <asp:Textbox ID="Textbox1" runat="server" /> &nbsp<asp:Label id="Label6" runat="server" Text="leave blank if above option is Y" />                                 <br/>

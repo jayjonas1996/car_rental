@@ -215,7 +215,7 @@ namespace car_rental
             Table2.Visible = true;
             add_vehicle.Visible = true;
 
-            SqlCommand cmd = new SqlCommand("select group_id,vehicle_name,availability,vehicle_status,kms_used,registration_no from vehicle_master where group_id=@group_id", con);
+            SqlCommand cmd = new SqlCommand("select group_id,vehicle_name,availability,vehicle_status,kms_used,fuel_type,seats,charges,registration_no from vehicle_master where group_id=@group_id", con);
             DataTable vehicle_table = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             var incomingbutton = (Button)sender;
@@ -235,6 +235,14 @@ namespace car_rental
             {
                 string availability = vehicle_table.Rows[i][2].ToString();
                 Label11.Text = vehicle_table.Rows[i][1].ToString();
+                Label_type.Text = vehicle_table.Rows[i][5].ToString();
+                Label_seats.Text = vehicle_table.Rows[i][6].ToString();
+                Label_charges.Text = vehicle_table.Rows[i][7].ToString();
+                
+                
+
+
+
                 //Row for displaying model name
                 var row_1 = new TableRow();
                 var cell_1_1 = new TableCell();
@@ -309,7 +317,7 @@ namespace car_rental
                 cell_6_1.Text = "Registration Number";
                 var cell_6_2 = new TableCell();
                 cell_6_2.HorizontalAlign = HorizontalAlign.Center;
-                cell_6_2.Text = vehicle_table.Rows[i][5].ToString();
+                cell_6_2.Text = vehicle_table.Rows[i][8].ToString();
                 row_6.Cells.Add(cell_6_1);
                 row_6.Cells.Add(cell_6_2);
 
@@ -341,7 +349,7 @@ namespace car_rental
             if (Textbox3.Text != "" && Textbox2.Text != "")
             {
 
-                SqlCommand cmd = new SqlCommand("insert into vehicle_master (group_id,vehicle_name,availability,vehicle_status,kms_used,registration_no) values(@group_id,@vehicle_name,@availability,@status,@kms_used,@registration_no)", con);
+                SqlCommand cmd = new SqlCommand("insert into vehicle_master (group_id,vehicle_name,availability,vehicle_status,kms_used,fuel_type,seats,charges,registration_no) values(@group_id,@vehicle_name,@availability,@status,@kms_used,@fuel_type,@seats,@charges,@registration_no)", con);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 cmd.Parameters.AddWithValue("@group_id", Label3.Text.ToString());
@@ -364,6 +372,9 @@ namespace car_rental
                 }
 
                 cmd.Parameters.AddWithValue("@kms_used",Textbox2.Text.ToString());
+                cmd.Parameters.AddWithValue("@fuel_type",Label_type.Text);
+                cmd.Parameters.AddWithValue("@seats"    ,Label_seats.Text);
+                cmd.Parameters.AddWithValue("@charges"  ,Label_charges.Text);
                 cmd.Parameters.AddWithValue("@registration_no",Textbox3.Text.ToString());
 
                 try
