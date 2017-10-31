@@ -33,12 +33,14 @@ namespace car_rental
             string hash = GetHash(my5, Login1.Password);
 
 
-            cmd.CommandText = "select count(*) from user_login where username = @username and passhash = @passhash";
+            cmd.CommandText = "select user_id from user_login where username = @username and passhash = @passhash";
             cmd.Parameters.AddWithValue("@username", Login1.UserName.ToLower());
             cmd.Parameters.AddWithValue("@passhash", hash);
 
+            int exist = 0;
             con.Open();
-            int exist = (int)cmd.ExecuteScalar();
+            try { exist = (int)cmd.ExecuteScalar(); }
+            catch { exist = 0; }
             con.Close();
             cmd.Parameters.Clear();
             if (exist == 0)
@@ -78,6 +80,7 @@ namespace car_rental
             }
             else
             {
+                Session["user_id"] = exist;
                 FormsAuthentication.RedirectFromLoginPage(Login1.UserName.ToLower(), true);         //LOGGING IN USER
             }
         }
