@@ -15,14 +15,14 @@ namespace car_rental
     public partial class manage_vehicles : System.Web.UI.Page
     {
 
-        static string[] imageExtentions = { "jpg","png","jpeg","gif","heif", "tiff" };
+        static string[] imageExtentions = { "jpg", "png", "jpeg", "gif", "heif", "tiff" };
         static string constr = WebConfigurationManager.ConnectionStrings["conshivam"].ConnectionString;
         static SqlConnection con = new SqlConnection(constr);
-
+        static string shared_id = "0";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("select group_id,vehicle_name,count(availability),charges,fuel_type,seats from vehicle_master group by group_id,vehicle_name,availability,fuel_type,seats,charges", con);
+            SqlCommand cmd = new SqlCommand("select group_id,vehicle_name,count(vehicle_name),charges,fuel_type,seats from vehicle_master group by group_id,vehicle_name,fuel_type,seats,charges", con);
             DataTable group_table = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
 
@@ -30,109 +30,112 @@ namespace car_rental
             adapter.Fill(group_table);
             con.Close();
 
+             
+                for (int i = 0; i < group_table.Rows.Count; i++)
+                {
+                    string group_id = group_table.Rows[i][0].ToString();
+                    string imagefull_url, image_relative_url;
 
-            for(int i =0; i < group_table.Rows.Count; i++)
-            {
-                string group_id = group_table.Rows[i][0].ToString();
-                string imagefull_url,image_relative_url;
+                    //Row for image and group_id
+                    var row_1 = new TableRow();
+                    var cell_1_1 = new TableCell();
+                    var image = new Image();
 
-                //Row for image and group_id
-                var row_1 = new TableRow();
-                var cell_1_1 = new TableCell();
-                var image = new Image();
-
-                DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(Server.MapPath("~/files/vimg/"));
-                FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles(group_id  + "*.*");
-                imagefull_url = filesInDir[0].FullName;                                                     //UNUSED
-                string filename = filesInDir[0].Name;
-                image_relative_url = "~\\files\\vimg\\" +filename;
-                image.ImageUrl = image_relative_url;
-                image.AlternateText = group_id;
-                image.Width = 128;
-                image.Height = 128;
-                cell_1_1.Controls.Add(image);
-                var cell_1_2 = new TableCell();
-                cell_1_2.Text = "Model Name; "+group_id;
-                var label_1 = new Label();
-                label_1.Text = group_id;
-                cell_1_2.Controls.Add(label_1);
-                cell_1_1.RowSpan = 6;
-                row_1.Cells.Add(cell_1_1);
-                row_1.Cells.Add(cell_1_2);
-
-
-                //Row for vehicle name
-                var row_2 = new TableRow();
-                var cell_2_1 = new TableCell();
-                cell_2_1.Text = "Name: "+ group_table.Rows[i][1].ToString();
-                row_2.Cells.Add(cell_2_1);
-
-                //Row for displaying total vehicles
-                var row_3 = new TableRow();
-                var cell_3_1 = new TableCell();
-                cell_3_1.Text = "Total: " + group_table.Rows[i][2].ToString();
-                row_3.Cells.Add(cell_3_1);
-
-                //Row to display number of seats
-                var row_7 = new TableRow();
-                var cell_7_1 = new TableCell();
-                cell_7_1.Text = "Charges Amount: " + group_table.Rows[i][3].ToString();
-                row_7.Cells.Add(cell_7_1);
-
-                //Row to display fuel type
-                var row_8 = new TableRow();
-                var cell_8_1 = new TableCell();
-                cell_8_1.Text = group_table.Rows[i][4].ToString();
-                row_8.Cells.Add(cell_8_1);
-
-                //Row to display  seats
-                var row_9 = new TableRow();
-                var cell_9_1 = new TableCell();
-                cell_9_1.Text = group_table.Rows[i][2].ToString()+" Seater";
-                row_9.Cells.Add(cell_9_1);
-
-                //Row for uploading more images button
-                var row_4 = new TableRow();
-                var cell_4_1 = new TableCell();
-                var btn_1 = new Button();
-                btn_1.Text = "Upload more Images";
-                btn_1.ID = group_id+"1";
-                btn_1.Click += new EventHandler(upload_images_btn);
-                cell_4_1.Controls.Add(btn_1);
-                row_4.Cells.Add(cell_4_1);
-
-                //Rows for placing SHOW ALL button 
-                var row_5 = new TableRow();
-                var cell_5_1 = new TableCell();
-                var btn_2 = new Button();
-                btn_2.Text = "Show All";
-                btn_2.ID = group_id + "2";
-                btn_2.Click += new EventHandler(show_all_btn);
-                cell_5_1.Controls.Add(btn_2);
-                row_5.Cells.Add(cell_5_1);
-
-                //Row for placing edit name button
-                var row_6 = new TableRow();
-                var cell_6_1 = new TableCell();
-                var btn_3 = new Button();
-                btn_3.Text = "Edit Name";
-                btn_3.ID = group_id+"3";
-                btn_3.Click += new EventHandler(edit_name_btn);
-                cell_6_1.Controls.Add(btn_3);
-                row_6.Cells.Add(cell_6_1);
+                    DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(Server.MapPath("~/files/vimg/"));
+                    FileInfo[] filesInDir = hdDirectoryInWhichToSearch.GetFiles(group_id + "*.*");
+                    imagefull_url = filesInDir[0].FullName;                                                     //UNUSED
+                    string filename = filesInDir[0].Name;
+                    image_relative_url = "~\\files\\vimg\\" + filename;
+                    image.ImageUrl = image_relative_url;
+                    image.AlternateText = group_id;
+                    image.Width = 128;
+                    image.Height = 128;
+                    cell_1_1.Controls.Add(image);
+                    var cell_1_2 = new TableCell();
+                    cell_1_2.Text = "Model Name; " + group_id;
+                    var label_1 = new Label();
+                    label_1.Text = group_id;
+                    cell_1_2.Controls.Add(label_1);
+                    cell_1_1.RowSpan = 8;
+                    row_1.Cells.Add(cell_1_1);
+                    row_1.Cells.Add(cell_1_2);
 
 
+                    //Row for vehicle name
+                    var row_2 = new TableRow();
+                    var cell_2_1 = new TableCell();
+                    cell_2_1.Text = "Name: " + group_table.Rows[i][1].ToString();
+                    row_2.Cells.Add(cell_2_1);
 
-                Table1.Rows.Add(row_1);
-                Table1.Rows.Add(row_2);
-                Table1.Rows.Add(row_3);
-                Table1.Rows.Add(row_7);
-                Table1.Rows.Add(row_8);
-                Table1.Rows.Add(row_9);
-                Table1.Rows.Add(row_4);
-                Table1.Rows.Add(row_5);
-                Table1.Rows.Add(row_6);
-            }
+                    //Row for displaying total vehicles
+                    var row_3 = new TableRow();
+                    var cell_3_1 = new TableCell();
+                    cell_3_1.Text = "Total: " + group_table.Rows[i][2].ToString();
+                    row_3.Cells.Add(cell_3_1);
+
+                    //Row to display number of seats
+                    var row_7 = new TableRow();
+                    var cell_7_1 = new TableCell();
+                    cell_7_1.Text = "Charges Amount: " + group_table.Rows[i][3].ToString();
+                    row_7.Cells.Add(cell_7_1);
+
+                    //Row to display fuel type
+                    var row_8 = new TableRow();
+                    var cell_8_1 = new TableCell();
+                    cell_8_1.Text = group_table.Rows[i][4].ToString();
+                    row_8.Cells.Add(cell_8_1);
+
+                    //Row to display  seats
+                    var row_9 = new TableRow();
+                    var cell_9_1 = new TableCell();
+                    cell_9_1.Text = group_table.Rows[i][2].ToString() + " Seater";
+                    row_9.Cells.Add(cell_9_1);
+
+                    //Row for uploading more images button
+                    var row_4 = new TableRow();
+                    var cell_4_1 = new TableCell();
+                    var btn_1 = new Button();
+                    btn_1.Text = "Upload more Images";
+                    btn_1.ID = group_id + "1";
+                    btn_1.Click += new EventHandler(upload_images_btn);
+                    cell_4_1.Controls.Add(btn_1);
+                    row_4.Cells.Add(cell_4_1);
+
+                    //Rows for placing SHOW ALL button 
+                    var row_5 = new TableRow();
+                    var cell_5_1 = new TableCell();
+                    var btn_2 = new Button();
+                    btn_2.Text = "Show All";
+                    btn_2.ID = group_id + "2";
+                    btn_2.Click += new EventHandler(show_all_btn);
+                    cell_5_1.Controls.Add(btn_2);
+                    row_5.Cells.Add(cell_5_1);
+
+                    //Row for placing edit name button
+                    var row_6 = new TableRow();
+                    var cell_6_1 = new TableCell();
+                    var btn_3 = new Button();
+                    btn_3.Text = "Edit Name";
+                    btn_3.ID = group_id + "3";
+                    //btn_3.Click += new EventHandler(show_edit_name);
+                    btn_3.OnClientClick = "return show_edit_name();";
+                    btn_3.UseSubmitBehavior = false;
+                    cell_6_1.Controls.Add(btn_3);
+                    row_6.Cells.Add(cell_6_1);
+
+
+
+                    Table1.Rows.Add(row_1);
+                    Table1.Rows.Add(row_2);
+                    Table1.Rows.Add(row_3);
+                    Table1.Rows.Add(row_7);
+                    Table1.Rows.Add(row_8);
+                    Table1.Rows.Add(row_9);
+                    Table1.Rows.Add(row_4);
+                    Table1.Rows.Add(row_5);
+                    //Table1.Rows.Add(row_6);
+                }
+            
         }
 
         protected void savebtn_Command(object sender, CommandEventArgs e)
@@ -165,6 +168,7 @@ namespace car_rental
                     else
                     {
                         cmd.Parameters.AddWithValue("@availability", 'N');
+                        cmd.Parameters.AddWithValue("vehicle_status","IN maintenance");
 
                     }
                     cmd.Parameters.AddWithValue("@kms_used", int.Parse(t3.Text));
@@ -215,14 +219,20 @@ namespace car_rental
             Table2.Visible = true;
             add_vehicle.Visible = true;
 
-            SqlCommand cmd = new SqlCommand("select group_id,vehicle_name,availability,vehicle_status,kms_used,fuel_type,seats,charges,registration_no from vehicle_master where group_id=@group_id", con);
+            SqlCommand cmd = new SqlCommand("select group_id,vehicle_name,availability,vehicle_status,kms_used,fuel_type,seats,charges,registration_no,vehicle_id from vehicle_master where group_id=@group_id", con);
             DataTable vehicle_table = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             var incomingbutton = (Button)sender;
-            string group_id = incomingbutton.ID.Remove(incomingbutton.ID.Length - 1); ;
+            string group_id = incomingbutton.ID.Remove(incomingbutton.ID.Length - 1); 
             add_vehicle.Text = "Add new " + group_id;
             Label3.Text = group_id;
+            editbutton.Visible = true;
+            editbutton.Text = "change name "+group_id;
+
             
+
+
+
 
             cmd.Parameters.AddWithValue("@group_id", group_id);
 
@@ -230,6 +240,13 @@ namespace car_rental
             adapter.Fill(vehicle_table);
             con.Close();
 
+            //labelling edit name popup
+            //edit_name_grp_id.Text = group_id;
+            //edit_name_box.Text = vehicle_table.Rows[0][1].ToString() ;
+
+            //enabling the table
+            Table3.Visible = true;
+            store_vid.Items.Clear();
             Table2.Rows.Clear();
             for (int i = 0; i < vehicle_table.Rows.Count; i++)
             {
@@ -238,18 +255,19 @@ namespace car_rental
                 Label_type.Text = vehicle_table.Rows[i][5].ToString();
                 Label_seats.Text = vehicle_table.Rows[i][6].ToString();
                 Label_charges.Text = vehicle_table.Rows[i][7].ToString();
-                
-                
 
+
+                //adding vehicle ids into drpodownlist
+                store_vid.Items.Add(vehicle_table.Rows[i][9].ToString());
 
 
                 //Row for displaying model name
                 var row_1 = new TableRow();
                 var cell_1_1 = new TableCell();
-                cell_1_1.Text = "Model Name";
+                cell_1_1.Text = "Vehicle ID:";
                 var cell_1_2 = new TableCell();
                 cell_1_2.HorizontalAlign = HorizontalAlign.Center;
-                cell_1_2.Text = vehicle_table.Rows[i][0].ToString();
+                cell_1_2.Text = vehicle_table.Rows[i][9].ToString();
                 row_1.Cells.Add(cell_1_1);
                 row_1.Cells.Add(cell_1_2);
 
@@ -321,6 +339,19 @@ namespace car_rental
                 row_6.Cells.Add(cell_6_1);
                 row_6.Cells.Add(cell_6_2);
 
+                /*Row for change status button
+                var row_7 = new TableRow();
+                var cell_7_1 = new TableCell();
+                var status_button = new Button();
+                status_button.ID = vehicle_table.Rows[i][9].ToString();
+                status_button.Click += new EventHandler(confirm);
+                status_button.Text = "change avail/status";
+                status_button.CssClass = "confirmbtn";
+                cell_7_1.Controls.Add(status_button);
+                row_7.Cells.Add(cell_7_1);
+                */
+
+                //Empty row
                 var empty_row = new TableRow();
                 var empty_cell = new TableCell();
                 empty_row.Height = Unit.Pixel(14);
@@ -334,14 +365,98 @@ namespace car_rental
                 Table2.Rows.Add(row_4);
                 Table2.Rows.Add(row_5);
                 Table2.Rows.Add(row_6);
+                //Table2.Rows.Add(row_7);
                 Table2.Rows.Add(empty_row);
+
+            }
+        }    
+
+        protected void edit_name_btn(object sendre, EventArgs e)
+        {
+            string group_id = edit_name_grp_id.Text.ToString();
+            if (edit_name_box.Text != "")
+            {
+                string new_name = edit_name_box.Text.ToString();
+
+                var cmd = new SqlCommand("update vehicle_master set vehicle_name=@vehicle_name where group_id=@group_id",con);
+                cmd.Parameters.AddWithValue("@vehicle_name",new_name);
+                cmd.Parameters.AddWithValue("@group_id",group_id);
+
+                con.Open();
+                int affected = cmd.ExecuteNonQuery();
+                con.Close();
+                if (affected != 0)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "name_changed", "alert('Name Changed of " + affected + " vehicles');", true);
+                }
+                else
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "not changed", "alert('ERROR');", true);
+                }
+
 
             }
         }
 
-        protected void edit_name_btn(object sender, EventArgs e)
+        /*protected void confirm(object sender, EventArgs e)
         {
+            var in_btn = (Button)sender;
+            string shared_id = in_btn.ID.ToString();
+            var change_btn = (Button)this.FindControl(shared_id);
+            change_btn.CssClass = "confirm_red";
+            change_btn.Text = "CONFIRM ?";
+            //change_btn.OnClientClick = "";
+            //change_btn.UseSubmitBehavior = false;
+        }*/
+
+        protected void change_status_pressed(object sender, EventArgs e)
+        {
+            //var in_btn = (Button)sender;
+            //string group_id = in_btn.ID.Remove(in_btn.ID.Length - 1);
+
+            string avail = dropdown_status_change.SelectedValue.ToString();
+            string status = new_status_box.Text.ToString();
+            string vehicle_id = store_vid.SelectedValue.ToString();
+
+            var cmd = new SqlCommand("update vehicle_master set availability=@avail,vehicle_status=@status where vehicle_id = @vehicle_id", con);
+            cmd.Parameters.AddWithValue("@vehicle_id", vehicle_id);
+
+
+            if (avail == "N")
+            {
+                if (new_status_box.Text == "")
+                {
+                    cmd.Parameters.AddWithValue("@status", "IN maintenance");
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@status", new_status_box.Text.ToString());
+                }
+
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@status", "none");
+            }
+            cmd.Parameters.AddWithValue("@avail", avail);
+                     
+
+            con.Open();
+            int affected = (int)cmd.ExecuteNonQuery();
+            con.Close();
+
+            if (affected != 0)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "status_changed", "alert('"+affected+"'s status changed');", true);
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "status_not_changed", "alert('error')", true);
+            }
+
+            
         }
+      
 
         protected void insert_vehicle_Click(object sender, EventArgs e)
         {

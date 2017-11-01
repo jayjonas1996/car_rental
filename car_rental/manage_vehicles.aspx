@@ -34,17 +34,48 @@
         }
         .vehiclebutton {
             position: relative;
+            left: 750px;
+        }
+        .editbutton {
+            top: 100px;
+            position :relative;
+            left: 800px;
+        }
+        .idiot_button{
+            font-size: 18px;
+            color: #ffd800;
+            padding: 3px 5px 5px 3px;
+            margin-bottom: 10px;
+            background-color:#FFFFFF;
+            border-color: #FFFFFF;
+        }
+        .confirmbtn
+        {
+            background-color:#6b83f5;
+        }
+        .confirm_red
+        {
+            background-color:#f16c6c;
+        }
+        .table_location {
+            position: relative;
             left: 850px;
-           
-
         }
-        .auto-style3 {
-            position: absolute;
-            right: 623px;
-            top: 228px;
-            margin-bottom: 0px;
+        </style>
+    <script>
+        function show_edit_name()
+        {
+            
+            $find("me").show();
+            return true;
+            
+            
         }
-    </style>
+        function show_image_up()
+        {
+            return false;
+        }
+    </script>
 </head>
 <body style="height: 669px">
     <form id="form1" runat="server">
@@ -56,6 +87,60 @@
             <asp:Button ID="newmodelbtn" runat="server" Text="New Model" Width="80px" />
             
             <asp:Button ID="add_vehicle" runat="server" CssClass="vehiclebutton" Text="Button" Visible="False" />
+            
+            <asp:Button ID="editbutton" runat="server" CssClass="vehiclebutton" clientscript="return show_edit_name();" Text="Button" Visible="False" />
+            
+            <br />
+&nbsp;&nbsp;&nbsp;
+            <asp:Table ID="Table3" runat="server" Visible="false" CssClass="table_location">
+                <asp:TableRow>
+                                    <asp:TableCell ColumnSpan="2" HorizontalAlign="Center">
+                                        <b>       <asp:Label text="change Status" runat="server"/>              </b>
+                                    </asp:TableCell>
+
+          </asp:TableRow>
+            <asp:TableRow>
+                                    <asp:TableCell>
+                                        <asp:Label runat="server" text="select vehicle id"></asp:Label>
+                                    </asp:TableCell>
+                                        
+                                    <asp:TableCell    HorizontalAlign="Center">
+                                        <asp:DropDownList ID="store_vid" runat="server" >
+
+                                        </asp:DropDownList>
+                                    </asp:TableCell>
+            </asp:TableRow>
+          <asp:TableRow>
+                                    <asp:TableCell>
+                                                  <asp:Label text="availability" runat="server"/>
+                                    </asp:TableCell>
+                                    <asp:TableCell>
+                                                    <asp:DropDownList ID="dropdown_status_change" runat="server">
+                                                        <asp:ListItem Selected="True">Y</asp:ListItem>
+                                                        <asp:ListItem>N</asp:ListItem>
+                                                    </asp:DropDownList>
+                                    </asp:TableCell>
+
+          </asp:TableRow>
+         <asp:TableRow>
+                                    <asp:TableCell>
+                                                    <asp:Label runat="server" Text="status" />
+                                    </asp:TableCell>
+                                    <asp:TableCell>
+                                                    <asp:TextBox runat="server" ID="new_status_box" />
+                                    </asp:TableCell>
+
+         </asp:TableRow>
+         <asp:TableRow>
+                                    <asp:TableCell HorizontalAlign="Center">
+                                                    <asp:Button ID="close_status_popup" runat="server" Text="cancel" />
+                                    </asp:TableCell>
+                                    <asp:TableCell HorizontalAlign="Center">
+                                                    <asp:Button ID="change_status" runat="server" text="Change Status"  OnClick="change_status_pressed" />
+                                    </asp:TableCell>
+
+         </asp:TableRow>
+            </asp:Table>
             
         </div>
 
@@ -113,14 +198,50 @@
             </asp:Panel>
 
 
-        <div class="auto-style2">
+        <!--modal extender for editing group name-->
+
+        <ajaxtoolkit:ModalPopupExtender ID="mp3" BehaviorID="me" runat="server" PopupControlID="Panel3_edit_name" TargetControlID="editbutton"
+    CancelControlID="close_group_name_modal" BackgroundCssClass="modalBackground">
+</ajaxtoolkit:ModalPopupExtender>
+
+        <!--edit group name panel-->
+
+        <asp:Panel ID="Panel3_edit_name" runat="server" CssClass="modalPopup" HorizontalAlign="Center" style="display:none">
+            <asp:table runat="server">
+                <asp:TableRow>
+                    <asp:TableCell >
+                        <asp:Label ID="edit_name_grp_id" runat="server" Text="__"/> 
+                    </asp:TableCell></asp:TableRow><asp:TableRow>
+                    <asp:TableCell >
+                            <b>    <asp:Label ID="show_heading_edit_name" runat="server" Text="Change Display Name"/> </b>
+                    </asp:TableCell></asp:TableRow><asp:TableRow>
+                    <asp:TableCell>
+                                    <asp:Label runat="server" Text="Name: "/>
+                    </asp:TableCell><asp:TableCell>
+                                    <asp:TextBox ID="edit_name_box" runat="server"/>
+                    </asp:TableCell></asp:TableRow><asp:TableRow>
+                    <asp:TableCell HorizontalAlign="Center">
+                                    <asp:Button ID="close_group_name_modal" runat="server" text="Cancel"/>
+                    </asp:TableCell><asp:TableCell HorizontalAlign="Center">
+                                    <asp:Button id="edit_name" runat="server" OnClick="edit_name_btn" text="Change" />
+                    </asp:TableCell></asp:TableRow></asp:table></asp:Panel>
+        
+        
+        <!-- modal extender for changing status --><!-- Change status panel -->
+        
+        <asp:Panel id="Panel3" runat="server" cssclass="modalPopup" HorizontalAlign="Center" style="display:none">
+
+                           
+
+        </asp:Panel><div class="auto-style2">
+            <asp:Button ID="dumb" visible="true" Enabled="false" CssClass="idiot_button" text="Models" runat="server"></asp:Button>
             <br />
             <asp:Table ID="Table1" runat="server">
             </asp:Table>
             
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        
-            <asp:Table ID="Table2" runat="server" HorizontalAlign="Right" Visible="False" BorderStyle="Solid" BorderWidth="2px" GridLines="Both">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Table ID="Table2" runat="server" HorizontalAlign="Right" Visible="False" BorderStyle="Solid" BorderWidth="2px" GridLines="Both">
+          
             </asp:Table>
             
         </div>
