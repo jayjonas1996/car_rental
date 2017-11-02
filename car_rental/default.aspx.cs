@@ -11,6 +11,29 @@ namespace car_rental
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string role = "";
+            try
+            {
+                role = Session["role"].ToString();
+            }
+            catch
+            {
+                Response.Redirect("login.aspx");
+            }
+
+            if (role == "admin")
+            {
+                user_div.Visible = false;
+            }
+            else if (role == "user")
+            {
+                admin_div.Visible = false;
+            }
+            else
+            {
+                Response.Redirect("login.aspx");
+            }
+
 
         }
     }

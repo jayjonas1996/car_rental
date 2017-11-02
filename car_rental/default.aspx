@@ -7,14 +7,17 @@
     <title></title>
     <style type="text/css">
         .auto-style1 {
-            height: 129px;
+            height: 134px;
         }
         .auto-style2 {
             height: 168px;
         }
+        .auto-style3 {
+            height: 207px;
+        }
     </style>
 </head>
-<body style="height: 367px">
+<body style="height: 620px">
     <form id="form1" runat="server" class="auto-style1">
     &nbsp;
         <asp:Label ID="Label1" runat="server" Text="Welcome "></asp:Label>
@@ -23,18 +26,21 @@
         <br />
         <br />
         <br />
-        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="profile.aspx">profile</asp:HyperLink>
+        
+        <br />
+        <br />
+        <div id="admin_div" runat="server" class="auto-style2">
+            <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="add_admin.aspx">add new admin user</asp:HyperLink>
+            <br />
+            <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="manage_vehicles.aspx">manage vehicles</asp:HyperLink>
+        </div>
+        <div id="user_div" runat="server" class="auto-style3">
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="profile.aspx">profile</asp:HyperLink>
         <br />
         <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="catalogue.aspx">new booking</asp:HyperLink>
         <br />
         <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="show_bookings.aspx">show bookings</asp:HyperLink>
         <br />
-        <br />
-        <br />
-        <div id="admin_div" class="auto-style2">
-            <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="add_admin.aspx">add new admin user</asp:HyperLink>
-            <br />
-            <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="manage_vehicles.aspx">manage vehicles</asp:HyperLink>
         </div>
     </form>
 </body>
