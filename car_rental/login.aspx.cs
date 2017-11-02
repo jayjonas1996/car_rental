@@ -70,6 +70,7 @@ namespace car_rental
                     {
                         con.Close();
                         Session["admin_id"] = admin_exists;
+                        Session["role"] = "admin";
                         FormsAuthentication.RedirectFromLoginPage(Login1.UserName, true);           //LOGGING IN ADMIN
                     }
                     else
@@ -87,6 +88,7 @@ namespace car_rental
             else
             {
                 Session["user_id"] = exist;
+                Session["role"] = "user";
                 FormsAuthentication.RedirectFromLoginPage(Login1.UserName.ToLower(), true);         //LOGGING IN USER
             }
         }

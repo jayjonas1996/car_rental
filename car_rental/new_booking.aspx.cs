@@ -48,6 +48,8 @@ namespace car_rental
             con.Close();
 
             string yn = exist.Value.ToString();
+
+            string role = Session["role"].ToString();
         }
     }
 }
