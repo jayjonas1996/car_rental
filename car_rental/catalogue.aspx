@@ -10,7 +10,7 @@
             height: 93px;
         }
         .prop_img {
-        width:12.5%;
+        width:27%;
         margin-right:3px;
         }
         .book_btn {
@@ -27,6 +27,7 @@
             float: left;
             margin-left: 30px;
             margin-top:70px;
+           
             
         }
         .product_area {

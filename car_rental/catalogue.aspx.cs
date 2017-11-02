@@ -32,6 +32,7 @@ namespace car_rental
             for (int i = 0; i < catalogue_query.Rows.Count; i++)
             {
                 var table = new Table();
+                //table.GridLines = GridLines.Both;
 
                 //finding images
                 DirectoryInfo hdDirectoryInWhichToSearch = new DirectoryInfo(Server.MapPath("~/files/vimg/"));
@@ -56,7 +57,7 @@ namespace car_rental
                 cell_2_1.Text = catalogue_query.Rows[i][1].ToString();
                 row_2.Cells.Add(cell_2_1);
 
-                //Row for vehicle name
+                //Row for vehicle's fuel type and seat count
                 var row_3 = new TableRow();
                 var cell_3_1 = new TableCell();
                 var cell_3_2 = new TableCell();
@@ -68,8 +69,10 @@ namespace car_rental
                 image_seat.CssClass = "prop_img";
                 image_fuel.ImageUrl = "~//assets//fuel.png";
                 image_seat.ImageUrl = "~//assets//seat.png";
-                //cell_3_1.HorizontalAlign = HorizontalAlign.Right;
-                //cell_3_3.HorizontalAlign = HorizontalAlign.Right;
+                cell_3_1.HorizontalAlign = HorizontalAlign.Right;
+                cell_3_3.HorizontalAlign = HorizontalAlign.Right;
+                cell_3_2.HorizontalAlign = HorizontalAlign.Left;
+                cell_3_4.HorizontalAlign = HorizontalAlign.Left;
                 cell_3_1.Controls.Add(image_fuel);
                 cell_3_3.Controls.Add(image_seat);
                 cell_3_2.Text = catalogue_query.Rows[i][2].ToString();
@@ -116,6 +119,9 @@ namespace car_rental
         protected void book_button_presed(object sender, EventArgs e)
         {
             var sender_btn = (Button)sender;
+            string group_id = sender_btn.ID;
+
+            Response.Redirect("new_booking.aspx?id="+group_id);
         }
     }
 }
