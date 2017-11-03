@@ -64,10 +64,10 @@
             <br />
         </div>
         <div class="auto-style2">
-            <asp:Table ID="Table1" runat="server">
+            <asp:Table ID="Table1" runat="server" Visible="False">
             </asp:Table>
             <br />
-            <asp:Button ID="book_btn" runat="server" Text="Book" Visible="False" />
+            <asp:Button ID="book_btn" runat="server" Text="Book" Visible="False" OnClick="book_btn_Click" />
         </div>
     </form>
 </body>

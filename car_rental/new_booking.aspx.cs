@@ -21,7 +21,9 @@ namespace car_rental
         static SqlConnection con = new SqlConnection(constr);
         static string global_location,global_group,global_pickup;
         static DateTime global_start, global_end;
+        static double global_cost = 0;
 
+        
         [System.Web.Script.Services.ScriptMethod()]
         [System.Web.Services.WebMethod()]
         protected void Page_Load(object sender, EventArgs e)
@@ -107,6 +109,8 @@ namespace car_rental
                     {
                         string id = vehicles.Rows[0][0].ToString();
                         book_btn.Visible = true;
+                        Table1.Visible = true;
+                        Table1.Rows.Clear();
 
                         //Heading row
                         var row_1 = new TableRow();
@@ -129,7 +133,7 @@ namespace car_rental
                         var cell_3_1 = new TableCell();
                         var cell_3_2 = new TableCell();
                         cell_3_1.Text = "booked from";
-                        cell_3_2.Text = start.Date.ToString().Substring(0,10)+" "+start.TimeOfDay;
+                        cell_3_2.Text = start.Date.ToString().Substring(0, 10) + " " + start.TimeOfDay;
                         row_3.Cells.Add(cell_3_1);
                         row_3.Cells.Add(cell_3_2);
 
@@ -138,7 +142,7 @@ namespace car_rental
                         var cell_4_1 = new TableCell();
                         var cell_4_2 = new TableCell();
                         cell_4_1.Text = "booked till";
-                        cell_4_2.Text = end.Date.ToString().Substring(0,10) +" "+ end.TimeOfDay;
+                        cell_4_2.Text = end.Date.ToString().Substring(0, 10) + " " + end.TimeOfDay;
                         row_4.Cells.Add(cell_4_1);
                         row_4.Cells.Add(cell_4_2);
 
@@ -176,11 +180,13 @@ namespace car_rental
                         if ((end.Date - start.Date).TotalDays == 0)
                         {
                             cell_8_1.Text = "Estimated Cost: " + "₹ " + vehicles.Rows[0][4].ToString();
+                            global_cost = int.Parse(vehicles.Rows[0][4].ToString());
                         }
                         else
                         {
-                            Int64 amount =    int.Parse(vehicles.Rows[0][4].ToString());
-                            cell_8_1.Text = "Estimated Cost: " + "₹ " + (   amount * (end.Date - start.Date).TotalDays);
+                            Int64 amount = int.Parse(vehicles.Rows[0][4].ToString());
+                            cell_8_1.Text = "Estimated Cost: " + "₹ " + (amount * (end.Date - start.Date).TotalDays);
+                            global_cost = (amount * (end.Date - start.Date).TotalDays);
                         }
                         row_8.Cells.Add(cell_8_1);
 
@@ -195,17 +201,88 @@ namespace car_rental
                         Table1.Rows.Add(row_8);
 
                     }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "no cars", "alert('Sorry no cars available');", true);
+                    }
 
                 }
                 else
                 {
-                    //invalid dates
+                    ClientScript.RegisterStartupScript(this.GetType(), "invaliddates", "alert('invalid dates');", true);
                 }
             }
             else
             {
-                //incomplete info
+                ClientScript.RegisterStartupScript(this.GetType(), "incompleteinfo", "alert('please provide all the information');", true);
             }
+        }
+
+        protected void book_btn_Click(object sender, EventArgs e)
+        {
+            var vehicles = new DataTable();
+            var cmd = new SqlCommand("SELECT VEHICLE_ID,vehicle_name,fuel_type,seats,CHARGES FROM VEHICLE_MASTER WHERE AVAILABILITY = 'Y' AND group_id=@group_id and VEHICLE_ID NOT IN(select vehicle_id from booking_master where booking_status = 'PROCESSING' OR booking_status = 'ONGOING' OR booking_status = 'CONFIRMED');", con);
+            var adapter = new SqlDataAdapter(cmd);
+            cmd.Parameters.AddWithValue("@group_id",global_group.ToString());
+
+            con.Open(); ;
+            adapter.Fill(vehicles);
+            con.Close();
+
+            if (vehicles.Rows.Count > 0)
+            {
+                var insertcmd = new SqlCommand("insert into booking_master (user_id,vehicle_id,location,pickup_location,book_date,rent_date,return_date,paid_amt,cost_amt,booking_status) values(@user_id,@vehicle_id,@location,@pickup_location,@book_date,@rent_date,@return_date,@paid_amt,@cost_amt,@booking_status)",con);
+                insertcmd.Parameters.AddWithValue("@user_id",4);
+                insertcmd.Parameters.AddWithValue("@vehicle_id",vehicles.Rows[0][0]);
+                insertcmd.Parameters.AddWithValue("@location",global_location);
+                insertcmd.Parameters.AddWithValue("@pickup_location",global_pickup);
+                SqlParameter now = insertcmd.Parameters.Add("@book_date", System.Data.SqlDbType.DateTime);
+                now.Value = DateTime.Now;
+                SqlParameter rent = insertcmd.Parameters.Add("@rent_date", System.Data.SqlDbType.DateTime);
+                rent.Value = global_start.Date;
+                SqlParameter ret  = insertcmd.Parameters.Add("@return_date", System.Data.SqlDbType.DateTime);
+                ret.Value = global_end.Date;
+                
+                insertcmd.Parameters.AddWithValue("@paid_amt",0);
+                insertcmd.Parameters.AddWithValue("@cost_amt",global_cost);
+                insertcmd.Parameters.AddWithValue("@booking_status", "PROCESSING");
+
+                con.Open();
+                int inserted = insertcmd.ExecuteNonQuery();
+                con.Close();
+
+                if (inserted > 0)
+                {
+                    var getid = new SqlCommand("select min(booking_id) from booking_master where user_id = @user_id order by book_date",con);
+                    getid.Parameters.AddWithValue("@user_id",4);
+
+                    con.Open();
+                    int book_id = (int)cmd.ExecuteScalar();
+                    con.Close();
+
+                    var insertmsg = new SqlCommand("insert into message_master (user_id,booking_id,message,msg_date) values(@user_id,@booking_id,@message,@msg_date)",con);
+                    SqlParameter today = insertmsg.Parameters.Add("@msg_date", System.Data.SqlDbType.DateTime);
+                    today.Value = DateTime.Now;
+                    insertmsg.Parameters.AddWithValue("@user_id",4);
+                    insertmsg.Parameters.AddWithValue("@booking_id",book_id);
+                    insertmsg.Parameters.AddWithValue("@message","Your booking is being processed");
+
+                    con.Open();
+                    int msginserted =  insertmsg.ExecuteNonQuery();
+                    con.Close();
+
+
+                    ClientScript.RegisterStartupScript(this.GetType(), "booked", "alert('booking successful, check my booking page');", true);
+                }
+                
+
+
+            }
+            else
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "not boked", "alert('car was unavailable Sorry');", true);
+            }
+
         }
     }
 }
