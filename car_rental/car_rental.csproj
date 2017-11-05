@@ -92,7 +92,9 @@
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
     <Content Include="pickup.xml" />
+    <Content Include="send_feedback.aspx" />
     <Content Include="show_bookings.aspx" />
+    <Content Include="show_feedback.aspx" />
     <Content Include="signup.aspx" />
     <Content Include="unauth.aspx" />
     <Content Include="Web.config" />
@@ -144,12 +146,26 @@
       <DependentUpon>new_booking.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="send_feedback.aspx.cs">
+      <DependentUpon>send_feedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="send_feedback.aspx.designer.cs">
+      <DependentUpon>send_feedback.aspx</DependentUpon>
+    </Compile>
     <Compile Include="show_bookings.aspx.cs">
       <DependentUpon>show_bookings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="show_bookings.aspx.designer.cs">
       <DependentUpon>show_bookings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="show_feedback.aspx.cs">
+      <DependentUpon>show_feedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="show_feedback.aspx.designer.cs">
+      <DependentUpon>show_feedback.aspx</DependentUpon>
     </Compile>
     <Compile Include="signup.aspx.cs">
       <DependentUpon>signup.aspx</DependentUpon>

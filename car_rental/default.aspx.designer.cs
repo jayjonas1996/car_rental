@@ -76,6 +76,24 @@ namespace car_rental {
         protected global::System.Web.UI.WebControls.HyperLink HyperLink5;
         
         /// <summary>
+        /// admin_hp7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink admin_hp7;
+        
+        /// <summary>
+        /// admin_hp8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink admin_hp8;
+        
+        /// <summary>
         /// user_div control.
         /// </summary>
         /// <remarks>
@@ -110,5 +128,14 @@ namespace car_rental {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink HyperLink3;
+        
+        /// <summary>
+        /// user_hp6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink user_hp6;
     }
 }
