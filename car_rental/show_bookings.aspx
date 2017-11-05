@@ -24,6 +24,10 @@
             <asp:Button ID="do_payment_btn" runat="server" Text="PAY" onClick="do_payment_pressed"/>
 
         </div>
+        <div id="cancel_div" visible="false" runat="server">
+            <asp:Label runat="server" ID="why_cancel" Text="Why cancel booking id:"/>&nbsp<asp:Label ID="display_cncl_id" runat="server" Text="__"/>&nbsp <asp:TextBox runat="server" ID="cancel_box" Width="200px" />  <br/>
+            <asp:Button runat="server" ID="cacncel_pressed"  OnClick="do_cancel" />
+        </div>
         <div>
 
 

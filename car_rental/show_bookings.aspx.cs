@@ -59,6 +59,8 @@ namespace car_rental
             cell_1_12.Text = "pay";
             var cell_1_13= new TableCell();
             cell_1_13.Text = "bill";
+            var cell_1_14 = new TableCell();
+            cell_1_14.Text = "Cancel";
 
             row_main.Cells.Add(cell_1_1);
             row_main.Cells.Add(cell_1_2);
@@ -73,6 +75,8 @@ namespace car_rental
             row_main.Cells.Add(cell_1_11);
             row_main.Cells.Add(cell_1_12);
             row_main.Cells.Add(cell_1_13);
+            row_main.Cells.Add(cell_1_14);
+
 
             Table1.Rows.Add(row_main);
 
@@ -94,6 +98,7 @@ namespace car_rental
 
                 var cell_2_12 = new TableCell();
                 var cell_2_13 = new TableCell();
+                var cell_2_14 = new TableCell();
 
                 cell_2_1.Text = bookings.Rows[i][0].ToString();
                 cell_2_2.Text = bookings.Rows[i][1].ToString();
@@ -119,7 +124,7 @@ namespace car_rental
                 pay_btn.Text = "Pay";
                 pay_btn.Click += new EventHandler(pay_btn_pressed);
                 var print = new Button();
-                print.ID = "a"+bookings.Rows[i][0].ToString();
+                print.ID = "a" + bookings.Rows[i][0].ToString();
                 print.Text = "Print Invoice";
                 print.Click += new EventHandler(print_btn_pressed);
 
@@ -130,6 +135,15 @@ namespace car_rental
                 else
                 {
                     cell_2_13.Controls.Add(print);
+                }
+
+                if (bookings.Rows[i][10].ToString() == "PROCESSING" || bookings.Rows[i][10].ToString() == "CONFIRMED")
+                {
+                    var cancel_btn = new Button();
+                    cancel_btn.Text = "Cancel";
+                    cancel_btn.ID = "c" +bookings.Rows[i][0].ToString();
+                    cancel_btn.Click += new EventHandler(cancel_tableBTN_pressed);
+                    cell_2_14.Controls.Add(cancel_btn);
                 }
 
                 new_row.Cells.Add(cell_2_1);
@@ -145,6 +159,7 @@ namespace car_rental
                 new_row.Cells.Add(cell_2_11);
                 new_row.Cells.Add(cell_2_12);
                 new_row.Cells.Add(cell_2_13);
+                new_row.Cells.Add(cell_2_14);
 
                 Table1.Rows.Add(new_row);
 
@@ -205,6 +220,43 @@ namespace car_rental
                 con.Open();
                 int inserted = cmd.ExecuteNonQuery();
                 con.Close();
+            }
+        }
+
+        protected void cancel_tableBTN_pressed(object sender, EventArgs e)
+        {
+            Button pressed = (Button)sender;
+            string id = pressed.ID.ToString();
+            id = id.Substring(1, id.Length - 1);
+
+            display_cncl_id.Text = id;
+            cancel_div.Visible = true;
+        }
+
+        protected void do_cancel(object sender, EventArgs e)
+        {
+            string id = display_cncl_id.Text.ToString();
+
+            if (cancel_box.Text != "")
+            {
+                var cmd = new SqlCommand("update booking_master set cancel_date=@cancel_date, cancel_msg = @cancel_msg,booking_status = @booking_status where booking_id = @booking_id", con);
+
+                SqlParameter now = cmd.Parameters.Add("@cancel_date", System.Data.SqlDbType.DateTime);
+                now.Value = DateTime.Now;
+                cmd.Parameters.AddWithValue("@cancel_msg",cancel_box.Text.ToString());
+                cmd.Parameters.AddWithValue("@booking_id",id);
+                cmd.Parameters.AddWithValue("@booking_status","CANCELLED");
+
+                con.Open();
+                int cancelled = cmd.ExecuteNonQuery();
+                con.Close();
+
+                if (cancelled > 0)
+                {
+                    ClientScript.RegisterStartupScript(this.GetType(), "cancelled", "alert('"+cancelled.ToString()+ " booking cancelled');", true);
+                }
+
+
             }
         }
     }

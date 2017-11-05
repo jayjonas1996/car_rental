@@ -10,7 +10,7 @@
 namespace car_rental {
     
     
-    public partial class show_bookings {
+    public partial class manage_bookings {
         
         /// <summary>
         /// form1 control.
@@ -22,138 +22,165 @@ namespace car_rental {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// LoginStatus1 control.
+        /// loginstatus1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginStatus LoginStatus1;
+        protected global::System.Web.UI.WebControls.LoginStatus loginstatus1;
         
         /// <summary>
-        /// payment_div control.
+        /// msg_div control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl payment_div;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl msg_div;
         
         /// <summary>
-        /// payment_idshow control.
+        /// datagrid1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label payment_idshow;
+        protected global::System.Web.UI.WebControls.DataGrid datagrid1;
         
         /// <summary>
-        /// display_id control.
+        /// message_box control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label display_id;
+        protected global::System.Web.UI.WebControls.TextBox message_box;
         
         /// <summary>
-        /// pay_amt control.
+        /// send_msg_btn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label pay_amt;
+        protected global::System.Web.UI.WebControls.Button send_msg_btn;
         
         /// <summary>
-        /// amount_box control.
+        /// label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox amount_box;
+        protected global::System.Web.UI.WebControls.Label label1;
         
         /// <summary>
-        /// card_label control.
+        /// display_b_id control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label card_label;
+        protected global::System.Web.UI.WebControls.Label display_b_id;
         
         /// <summary>
-        /// card_box control.
+        /// label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox card_box;
+        protected global::System.Web.UI.WebControls.Label label2;
         
         /// <summary>
-        /// do_payment_btn control.
+        /// display_u_id control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button do_payment_btn;
+        protected global::System.Web.UI.WebControls.Label display_u_id;
         
         /// <summary>
-        /// cancel_div control.
+        /// complete_div control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl cancel_div;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl complete_div;
         
         /// <summary>
-        /// why_cancel control.
+        /// lbl_2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label why_cancel;
+        protected global::System.Web.UI.WebControls.Label lbl_2;
         
         /// <summary>
-        /// display_cncl_id control.
+        /// display_booking_id control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label display_cncl_id;
+        protected global::System.Web.UI.WebControls.Label display_booking_id;
         
         /// <summary>
-        /// cancel_box control.
+        /// cl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox cancel_box;
+        protected global::System.Web.UI.WebControls.Label cl1;
         
         /// <summary>
-        /// cacncel_pressed control.
+        /// kms_box control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button cacncel_pressed;
+        protected global::System.Web.UI.WebControls.TextBox kms_box;
         
         /// <summary>
-        /// Table1 control.
+        /// lbl3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Table1;
+        protected global::System.Web.UI.WebControls.Label lbl3;
+        
+        /// <summary>
+        /// fuel_box control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox fuel_box;
+        
+        /// <summary>
+        /// do_complete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button do_complete;
+        
+        /// <summary>
+        /// table1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table table1;
     }
 }

@@ -75,6 +75,7 @@
     <Content Include="files\vimg\TextFile1.txt" />
     <Content Include="Global.asax" />
     <Content Include="login.aspx" />
+    <Content Include="manage_bookings.aspx" />
     <Content Include="manage_vehicles.aspx" />
     <Content Include="new_booking.aspx" />
     <Content Include="packages.config" />
@@ -120,6 +121,13 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="manage_bookings.aspx.cs">
+      <DependentUpon>manage_bookings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="manage_bookings.aspx.designer.cs">
+      <DependentUpon>manage_bookings.aspx</DependentUpon>
     </Compile>
     <Compile Include="manage_vehicles.aspx.cs">
       <DependentUpon>manage_vehicles.aspx</DependentUpon>
