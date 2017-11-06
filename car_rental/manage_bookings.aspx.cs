@@ -18,7 +18,25 @@ namespace car_rental
         static SqlConnection con = new SqlConnection(constr);
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (Session["role"].ToString() == "admin")
+                {
 
+                }
+                else if (Session["role"].ToString() == "user")
+                {
+                    Response.Redirect("default.aspx");
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
+            }
+            catch
+            {
+                Response.Redirect("login.aspx");
+            }
 
             var cmd = new SqlCommand("select booking_id,user_id,vehicle_name,registration_no,location,pickup_location,rent_date,return_date,booking_status,paid_amt,cost_amt, kms, cancel_date,cancel_msg,fuel_amt from booking_master join vehicle_master  on(booking_master.vehicle_id = vehicle_master.vehicle_id) order by book_date desc ", con);
             var results = new DataTable();
@@ -337,6 +355,11 @@ namespace car_rental
 
                 
             }
+        }
+
+        protected void loginstatus1_LoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            Session["role"] = "null";            
         }
     }
 }

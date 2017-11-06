@@ -302,5 +302,11 @@ namespace car_rental
 
             }
         }
+
+        protected void LoginStatus1_LoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            Session["role"] = "null";
+            Session["user_id"] = 0;
+        }
     }
 }

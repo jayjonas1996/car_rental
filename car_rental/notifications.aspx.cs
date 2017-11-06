@@ -38,19 +38,21 @@ namespace car_rental
             {
                 Response.Redirect("login.aspx");
             }
-
-            var cmd = new SqlCommand("select booking_id from booking_master where user_id=@user_id order by booking_id desc",con);
-            cmd.Parameters.AddWithValue("@user_id",global_user_id);
-            var adapter = new SqlDataAdapter(cmd);
-            var results = new DataTable();
-            con.Open();
-            adapter.Fill(results);
-            con.Close();
-
-            dropdown_bookid.Items.Clear();
-            for (int i = 0; i < results.Rows.Count; i++)
+            if (!IsPostBack)
             {
-                dropdown_bookid.Items.Add(results.Rows[i][0].ToString());
+                var cmd = new SqlCommand("select booking_id from booking_master where user_id=@user_id order by booking_id desc", con);
+                cmd.Parameters.AddWithValue("@user_id", global_user_id);
+                var adapter = new SqlDataAdapter(cmd);
+                var results = new DataTable();
+                con.Open();
+                adapter.Fill(results);
+                con.Close();
+
+                //dropdown_bookid.Items.Clear();
+                for (int i = 0; i < results.Rows.Count; i++)
+                {
+                    dropdown_bookid.Items.Add(results.Rows[i][0].ToString());
+                }
             }
         }
 

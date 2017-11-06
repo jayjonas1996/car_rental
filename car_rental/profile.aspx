@@ -38,7 +38,9 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="scriptmanager1" runat="server" />
         <div>
-            <asp:LoginStatus ID="loginstatus2" runat="server" OnLoggingOut="loginstatus2_LoggingOut" /> <asp:Button ID="delete_pop" Text="DELETE ACCOUNT" runat="server" />
+            <asp:LoginStatus ID="loginstatus2" runat="server" OnLoggingOut="loginstatus2_LoggingOut" /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="default.aspx">HOME</asp:HyperLink>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Button ID="delete_pop" Text="DELETE ACCOUNT" runat="server" />
         </div>
         <div>
             <asp:DetailsView ID="detailview1" runat="server" />
@@ -71,86 +73,47 @@
 
                         <asp:Label runat="server" ID="lb1" Text="Old Password:" />
 
-                    </asp:TableCell>
-
-                    <asp:TableCell>
+                    </asp:TableCell><asp:TableCell>
 
                         <asp:TextBox ID="old_pass_box" runat="server" /> 
 
-                    </asp:TableCell>
-
-                </asp:TableRow>
-
-                <asp:TableRow>
+                    </asp:TableCell></asp:TableRow><asp:TableRow>
 
                     <asp:TableCell>
 
                         <asp:Label runat="server" ID="Lbl2" Text="New Password" />
 
-                    </asp:TableCell>
-
-                    <asp:TableCell>
+                    </asp:TableCell><asp:TableCell>
 
                         <asp:TextBox ID="new_password_box" runat="server" type="password" /> 
 
-                    </asp:TableCell>
-
-                </asp:TableRow>
-
-                <asp:TableRow>
+                    </asp:TableCell></asp:TableRow><asp:TableRow>
 
                     <asp:TableCell>
 
                         <asp:Label ID="lbl_retype" Text="Re enter New password" runat="server" />
 
-                    </asp:TableCell>
-
-                    <asp:TableCell>
+                    </asp:TableCell><asp:TableCell>
 
                         <asp:TextBox ID="new_password_re_box" type="password" runat="server"/>
 
-                    </asp:TableCell>
-
-                </asp:TableRow>
-
-                <asp:TableRow>
+                    </asp:TableCell></asp:TableRow><asp:TableRow>
 
                     <asp:TableCell >
 
                         <asp:Button ID="close" Text="Cancel" runat="server" />
 
-                    </asp:TableCell>
-
-                    <asp:TableCell>
+                    </asp:TableCell><asp:TableCell>
 
                         <asp:Button ID="change_pass_btn" Text="Change" runat="server" OnClick="change_pass_btn_Click"/>
 
-                    </asp:TableCell>
-
-                    
-
-                </asp:TableRow>
-
-                 <asp:TableRow>
+                    </asp:TableCell></asp:TableRow><asp:TableRow>
 
                      <asp:TableCell ColumnSpan="2" text="Please fill all the required information and make sure new password is different than old password">
                             
 
 
-                    </asp:TableCell>
-
-                 </asp:TableRow>
-
-            </asp:Table>
-          
-
-        </asp:Panel>
-
-
-
-        <!-- Modal extender for deleting account -->
-
-        <ajaxtoolkit:ModalPopupExtender ID="extender_delete"  runat="server" PopupControlID="delete_acc_panel" TargetControlID="delete_pop"
+                    </asp:TableCell></asp:TableRow></asp:Table></asp:Panel><!-- Modal extender for deleting account --><ajaxtoolkit:ModalPopupExtender ID="extender_delete"  runat="server" PopupControlID="delete_acc_panel" TargetControlID="delete_pop"
     CancelControlID="close2" BackgroundCssClass="modalBackground">
 </ajaxtoolkit:ModalPopupExtender>
 
@@ -169,37 +132,18 @@
 
                         <asp:Label id="display_lbl1" runat="server" Text="Confirm Password" />
 
-                    </asp:TableCell>
-
-                    <asp:TableCell>
+                    </asp:TableCell><asp:TableCell>
 
                         <asp:TextBox ID="confirm_pass_box" type="password" runat="server" />
 
-                    </asp:TableCell>
-
-                </asp:TableRow>
-
-
-                <asp:TableRow >
+                    </asp:TableCell></asp:TableRow><asp:TableRow >
 
                     <asp:TableCell >
 
                         <asp:Button ID="close2" text="close" runat="server" />
 
-                    </asp:TableCell>
-
-                    <asp:TableCell>
+                    </asp:TableCell><asp:TableCell>
 
                         <asp:Button ID="delete_acc" runat="server" OnClick="delete_acc_Click" text="CONFIRM DELETE" />
 
-                    </asp:TableCell>
-
-                </asp:TableRow>
-
-            </asp:Table>
-
-        </asp:Panel>
-
-    </form>
-</body>
-</html>
+                    </asp:TableCell></asp:TableRow></asp:Table></asp:Panel></form></body></html>

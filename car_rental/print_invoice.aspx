@@ -9,6 +9,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
+
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="default.aspx">HOME</asp:HyperLink>
+
+        </div>
+        <div>
             <asp:DetailsView ID="DetailsView1" runat="server" Height="50px" Width="407px">
             </asp:DetailsView>
             <br />

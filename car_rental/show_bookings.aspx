@@ -14,7 +14,9 @@
 <body style="height: 638px">
     <form id="form1" runat="server">
         <div>
-            <asp:LoginStatus ID="LoginStatus1" runat="server" />
+            <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutPageUrl="login.aspx" OnLoggingOut="LoginStatus1_LoggingOut" />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="default.aspx">Home</asp:HyperLink>
         </div>
         <div id="payment_div" visible="false" runat="server" class="auto-style1">
 
