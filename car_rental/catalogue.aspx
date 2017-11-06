@@ -42,7 +42,7 @@
 <body style="height: 91px">
     <form id="form1" runat="server">
         <div class="auto-style1">
-            
+            <asp:LoginStatus ID="loginstatus" runat="server" OnLoggingOut="loginstatus_LoggingOut" />
         </div>
         <asp:Panel ID="Product_Panel" CssClass="product_area" runat="server">
         </asp:Panel>

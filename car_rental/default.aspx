@@ -53,6 +53,8 @@
         <br />
         <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="show_bookings.aspx">show bookings</asp:HyperLink>
         <br />
+            <asp:HyperLink ID="user_hp9" runat="server" NavigateUrl="~/notifications.aspx">Notifications</asp:HyperLink>
+            <br />
             <asp:HyperLink id="user_hp6" runat="server" NavigateUrl="send_feedback.aspx">send feedback</asp:HyperLink>
             <br />
             

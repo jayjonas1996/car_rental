@@ -10,7 +10,7 @@
 namespace car_rental {
     
     
-    public partial class catalogue {
+    public partial class notifications {
         
         /// <summary>
         /// form1 control.
@@ -22,21 +22,39 @@ namespace car_rental {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// loginstatus control.
+        /// loginstatus1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LoginStatus loginstatus;
+        protected global::System.Web.UI.WebControls.LoginStatus loginstatus1;
         
         /// <summary>
-        /// Product_Panel control.
+        /// dropdown_bookid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Product_Panel;
+        protected global::System.Web.UI.WebControls.DropDownList dropdown_bookid;
+        
+        /// <summary>
+        /// show_notifications control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button show_notifications;
+        
+        /// <summary>
+        /// gridview1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gridview1;
     }
 }

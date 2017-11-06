@@ -130,6 +130,15 @@ namespace car_rental {
         protected global::System.Web.UI.WebControls.HyperLink HyperLink3;
         
         /// <summary>
+        /// user_hp9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink user_hp9;
+        
+        /// <summary>
         /// user_hp6 control.
         /// </summary>
         /// <remarks>

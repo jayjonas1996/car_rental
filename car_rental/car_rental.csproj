@@ -79,6 +79,7 @@
     <Content Include="manage_bookings.aspx" />
     <Content Include="manage_vehicles.aspx" />
     <Content Include="new_booking.aspx" />
+    <Content Include="notifications.aspx" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -154,6 +155,13 @@
     </Compile>
     <Compile Include="new_booking.aspx.designer.cs">
       <DependentUpon>new_booking.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="notifications.aspx.cs">
+      <DependentUpon>notifications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="notifications.aspx.designer.cs">
+      <DependentUpon>notifications.aspx</DependentUpon>
     </Compile>
     <Compile Include="print_invoice.aspx.cs">
       <DependentUpon>print_invoice.aspx</DependentUpon>

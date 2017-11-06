@@ -18,9 +18,30 @@ namespace car_rental
         
         static string constr = WebConfigurationManager.ConnectionStrings["conshivam"].ConnectionString;
         static SqlConnection con = new SqlConnection(constr);
-
+        static string global_user_id;
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (Session["role"].ToString() == "user")
+                {
+                    global_user_id = Session["user_id"].ToString();
+                }
+                else if (Session["role"].ToString() == "admin")
+                {
+                    Response.Redirect("default.aspx");
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
+            }
+            catch
+            {
+                Response.Redirect("login.aspx");
+            }
+
+
             var cmd = new SqlCommand("select group_id,vehicle_name,fuel_type,seats,charges from vehicle_master where availability='Y' group by group_id,vehicle_name,fuel_type,seats,charges ", con);
             var catalogue_query = new DataTable();
             var adapter = new SqlDataAdapter(cmd);
@@ -122,6 +143,12 @@ namespace car_rental
             string group_id = sender_btn.ID;
 
             Response.Redirect("new_booking.aspx?id="+group_id);
+        }
+
+        protected void loginstatus_LoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            Session["role"] = "null";
+            Session["user_id"] = 0;
         }
     }
 }
