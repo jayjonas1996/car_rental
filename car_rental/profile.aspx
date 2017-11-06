@@ -13,6 +13,9 @@
         </div>
         <div>
             <asp:DetailsView ID="detailview1" runat="server" />
+            <asp:FileUpload ID="fup1" runat="server" /> &nbsp<asp:Button ID="upload_btn" OnClick="upload_btn_Click"  Text="Upload" runat="server" />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Image ID="Image1" runat="server" Width="400px" />
         </div>
     </form>
 </body>
