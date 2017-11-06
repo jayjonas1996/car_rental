@@ -22,6 +22,30 @@ namespace car_rental
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (Session["role"].ToString() == "admin")
+                {
+
+                }
+                else if (Session["role"].ToString() == "user")
+                {
+                    Response.Redirect("default.aspx");
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
+            }
+            catch
+            {
+                Response.Redirect("login.aspx");
+            }
+
+
+
+
+
             SqlCommand cmd = new SqlCommand("select group_id,vehicle_name,count(vehicle_name),charges,fuel_type,seats from vehicle_master group by group_id,vehicle_name,fuel_type,seats,charges", con);
             DataTable group_table = new DataTable();
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
@@ -56,7 +80,7 @@ namespace car_rental
                     var label_1 = new Label();
                     label_1.Text = group_id;
                     cell_1_2.Controls.Add(label_1);
-                    cell_1_1.RowSpan = 8;
+                    cell_1_1.RowSpan = 7;
                     row_1.Cells.Add(cell_1_1);
                     row_1.Cells.Add(cell_1_2);
 
@@ -131,7 +155,7 @@ namespace car_rental
                     Table1.Rows.Add(row_7);
                     Table1.Rows.Add(row_8);
                     Table1.Rows.Add(row_9);
-                    Table1.Rows.Add(row_4);
+                    //Table1.Rows.Add(row_4);
                     Table1.Rows.Add(row_5);
                     //Table1.Rows.Add(row_6);
                 }
@@ -507,6 +531,12 @@ namespace car_rental
             { ClientScript.RegisterStartupScript(this.GetType(), "inserted", "alert('Vehicle added');", true); }
             else
             { ClientScript.RegisterStartupScript(this.GetType(), "not inserted", "alert('ERROR, Be Sure to insert all the data');", true); }
+        }
+
+        protected void loginstatus1_LoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            Session["role"] = "null";
+           
         }
     }
 }

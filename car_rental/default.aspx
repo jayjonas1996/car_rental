@@ -22,7 +22,7 @@
     &nbsp;
         <asp:Label ID="Label1" runat="server" Text="Welcome "></asp:Label>
 &nbsp;<asp:LoginName ID="LoginName1" runat="server" />
-        <asp:LoginStatus ID="LoginStatus1" runat="server" />
+        <asp:LoginStatus ID="LoginStatus1" runat="server" OnLoggingOut="LoginStatus1_LoggingOut" />
         <br />
         <br />
         <br />
@@ -40,6 +40,8 @@
             <asp:HyperLink ID="admin_hp7" runat="server" NavigateUrl="~/manage_bookings.aspx">manage bookings</asp:HyperLink>
             <br />
             <asp:HyperLink ID="admin_hp8" runat="server" NavigateUrl="~/show_feedback.aspx">show feedbacks</asp:HyperLink>
+            <br />
+            
         </div>
 
 
@@ -52,6 +54,8 @@
         <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="show_bookings.aspx">show bookings</asp:HyperLink>
         <br />
             <asp:HyperLink id="user_hp6" runat="server" NavigateUrl="send_feedback.aspx">send feedback</asp:HyperLink>
+            <br />
+            
         </div>
     </form>
 </body>

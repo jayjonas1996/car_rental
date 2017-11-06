@@ -16,6 +16,10 @@
         .auto-style3 {
             width: 491px;
         }
+        .far {
+            position: relative;
+            left: 500px;
+        }
     </style>
 </head>
 <body style="height: 714px">
@@ -23,6 +27,8 @@
         <div class="auto-style1">
             <br />
             <asp:Label ID="Label1" runat="server" Text="SIGNUP:"></asp:Label>
+            <asp:HyperLink ID="tp_login" runat="server" CssClass="far" NavigateUrl="~/login.aspx"> </asp:HyperLink>
+            <br />
             <table class="auto-style2">
                 <tr>
                     <td class="auto-style3">

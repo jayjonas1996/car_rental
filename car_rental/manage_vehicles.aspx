@@ -81,7 +81,7 @@
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <div class="auto-style1">
-           <h1> <asp:Label ID="Label1" runat="server" Text="Manage Vehicles"></asp:Label></h1>
+           <h1> <asp:Label ID="Label1" runat="server" Text="Manage Vehicles"></asp:Label></h1><asp:LoginStatus ID="loginstatus1" runat="server" OnLoggingOut="loginstatus1_LoggingOut" />
             <br />
             <br />
             <asp:Button ID="newmodelbtn" runat="server" Text="New Model" Width="80px" />
@@ -96,83 +96,45 @@
                 <asp:TableRow>
                                     <asp:TableCell ColumnSpan="2" HorizontalAlign="Center">
                                         <b>       <asp:Label text="change Status" runat="server"/>              </b>
-                                    </asp:TableCell>
-
-          </asp:TableRow>
-            <asp:TableRow>
+                                    </asp:TableCell></asp:TableRow><asp:TableRow>
                                     <asp:TableCell>
                                         <asp:Label runat="server" text="select vehicle id"></asp:Label>
-                                    </asp:TableCell>
-                                        
-                                    <asp:TableCell    HorizontalAlign="Center">
+                                    </asp:TableCell><asp:TableCell    HorizontalAlign="Center">
                                         <asp:DropDownList ID="store_vid" runat="server" >
 
                                         </asp:DropDownList>
-                                    </asp:TableCell>
-            </asp:TableRow>
-          <asp:TableRow>
+                                    </asp:TableCell></asp:TableRow><asp:TableRow>
                                     <asp:TableCell>
                                                   <asp:Label text="availability" runat="server"/>
-                                    </asp:TableCell>
-                                    <asp:TableCell>
+                                    </asp:TableCell><asp:TableCell>
                                                     <asp:DropDownList ID="dropdown_status_change" runat="server">
                                                         <asp:ListItem Selected="True">Y</asp:ListItem>
                                                         <asp:ListItem>N</asp:ListItem>
                                                     </asp:DropDownList>
-                                    </asp:TableCell>
-
-          </asp:TableRow>
-         <asp:TableRow>
+                                    </asp:TableCell></asp:TableRow><asp:TableRow>
                                     <asp:TableCell>
                                                     <asp:Label runat="server" Text="status" />
-                                    </asp:TableCell>
-                                    <asp:TableCell>
+                                    </asp:TableCell><asp:TableCell>
                                                     <asp:TextBox runat="server" ID="new_status_box" />
-                                    </asp:TableCell>
-
-         </asp:TableRow>
-         <asp:TableRow>
+                                    </asp:TableCell></asp:TableRow><asp:TableRow>
                                     <asp:TableCell HorizontalAlign="Center">
                                                     <asp:Button ID="close_status_popup" runat="server" Text="cancel" />
-                                    </asp:TableCell>
-                                    <asp:TableCell HorizontalAlign="Center">
+                                    </asp:TableCell><asp:TableCell HorizontalAlign="Center">
                                                     <asp:Button ID="change_status" runat="server" text="Change Status"  OnClick="change_status_pressed" />
-                                    </asp:TableCell>
-
-         </asp:TableRow>
-            </asp:Table>
-            
-        </div>
-
-
-        <ajaxtoolkit:ModalPopupExtender ID="mp1" runat="server" PopupControlID="Panel1" TargetControlID="newmodelbtn"
+                                    </asp:TableCell></asp:TableRow></asp:Table></div><ajaxtoolkit:ModalPopupExtender ID="mp1" runat="server" PopupControlID="Panel1" TargetControlID="newmodelbtn"
     CancelControlID="btnClose" BackgroundCssClass="modalBackground">
 </ajaxtoolkit:ModalPopupExtender>
 
 
         <asp:Panel ID="Panel1" runat="server" CssClass="modalPopup" align="center" style = "display:none">
-   <h3>Add new model</h3>                                                                                                                        
-            <h5>Add first vehicle</h5>                                                                                                           <br/>           
-        <asp:Label id="l1" runat="server" Text="Model name(ID):" />               <asp:Textbox ID="t1" runat="server" />                         <br/>
+   <h3>Add new model</h3><h5>Add first vehicle</h5><br/><asp:Label id="l1" runat="server" Text="Model name(ID):" />               <asp:Textbox ID="t1" runat="server" />                         <br/>
         <asp:Label id="l2" runat="server" Text="Name:" />                         <asp:Textbox ID="t2" runat="server" />                         <br/>
         <asp:Label runat="server" ID="l3" Text="available?"/>                     <asp:CheckBox runat="server"  ID="yncheckbox"/>                <br/>
         <asp:Label runat="server" ID="l4" Text="kilometers used?"  />             <asp:Textbox runat="server" ID="t3" type="number"/>            <br/>
        <asp:Label runat="server" ID="Label12" Text="Fuel Type"  />     <asp:RadioButton ID="RadioButton1" runat="server"  GroupName="f" Text="petrol" Checked="True" />
           <asp:RadioButton ID="RadioButton2" runat="server" GroupName="f" Text="diesel" />  <br/>
          <asp:Label runat="server" ID="seats" Text="number of seats; "  />   <asp:DropDownList ID="seats_list" runat="server" >
-            <asp:ListItem Selected="True">2</asp:ListItem>
-            <asp:ListItem>3</asp:ListItem>
-            <asp:ListItem>4</asp:ListItem>
-            <asp:ListItem>5</asp:ListItem>
-                <asp:ListItem>6</asp:ListItem>
-            <asp:ListItem>7</asp:ListItem>
-                <asp:ListItem>8</asp:ListItem>
-            <asp:ListItem>9</asp:ListItem>
-                <asp:ListItem>10</asp:ListItem>
-            <asp:ListItem>11</asp:ListItem>
-                 <asp:ListItem>12</asp:ListItem>
-        </asp:DropDownList>                                                         <br/>
-            <asp:Label runat="server" ID="Label13" Text="Charge amount:"  />             <asp:Textbox runat="server" ID="Textbox4" type="number"/>            <br/>
+            <asp:ListItem Selected="True">2</asp:ListItem><asp:ListItem>3</asp:ListItem><asp:ListItem>4</asp:ListItem><asp:ListItem>5</asp:ListItem><asp:ListItem>6</asp:ListItem><asp:ListItem>7</asp:ListItem><asp:ListItem>8</asp:ListItem><asp:ListItem>9</asp:ListItem><asp:ListItem>10</asp:ListItem><asp:ListItem>11</asp:ListItem><asp:ListItem>12</asp:ListItem></asp:DropDownList><br/><asp:Label runat="server" ID="Label13" Text="Charge amount:"  />             <asp:Textbox runat="server" ID="Textbox4" type="number"/>            <br/>
         <asp:Label id="l5" runat="server" Text="Registration Number" />           <asp:Textbox ID="t4" runat="server" />        <asp:Label runat="server" ID="l6" Text="eg. XX01YY1234" />      <br/>
         <asp:FileUpload runat="server" id="fileupload_vimg" />                                                                                      <br/>
             <asp:Button ID="btnClose" runat="server" Text="Close" /> <asp:Button ID="savebtn" runat="server" Text="save" oncommand="savebtn_Command"/>
@@ -185,13 +147,10 @@
 
 
         <asp:Panel ID="Panel2" runat="server" CssClass="modalPopup" HorizontalAlign="Center" style="display:none">
-            <h4>Add another</h4>
-            <asp:Label id="Label2" runat="server" Text="Vehicle ID:" />&nbsp&nbsp&nbsp<asp:Label id="Label3" runat="server" Text=" :" />              <br/>
+            <h4>Add another</h4><asp:Label id="Label2" runat="server" Text="Vehicle ID:" />&nbsp&nbsp&nbsp<asp:Label id="Label3" runat="server" Text=" :" />              <br/>
             <asp:Label id="Label10" runat="server" Text="Vehicle Name:" />&nbsp&nbsp&nbsp<asp:Label id="Label11" runat="server" Text=" :" />              <br/>
             <asp:Label id="Label_seats" runat="server" Text="___" />&nbsp&nbsp <asp:Label id="Label_charges" runat="server" Text="___" /> &nbsp&nbsp<asp:Label id="Label_type" runat="server" Text="____" />        <br/>
-            <asp:Label id="Label4" runat="server" Text="availability:" />  &nbsp&nbsp&nbsp    <asp:DropDownList runat="server" ID="dropdown_yn">  <asp:ListItem Selected="True">Y</asp:ListItem>
-              <asp:ListItem>N</asp:ListItem>   </asp:DropDownList>                    <br/>
-            <asp:Label id="Label5" runat="server" Text="Status" />   &nbsp&nbsp&nbsp   <asp:Textbox ID="Textbox1" runat="server" /> &nbsp<asp:Label id="Label6" runat="server" Text="leave blank if above option is Y" />                                 <br/>
+            <asp:Label id="Label4" runat="server" Text="availability:" />  &nbsp&nbsp&nbsp <asp:DropDownList runat="server" ID="dropdown_yn">  <asp:ListItem Selected="True">Y</asp:ListItem><asp:ListItem>N</asp:ListItem></asp:DropDownList><br/><asp:Label id="Label5" runat="server" Text="Status" />   &nbsp&nbsp&nbsp <asp:Textbox ID="Textbox1" runat="server" /> &nbsp<asp:Label id="Label6" runat="server" Text="leave blank if above option is Y" />                                 <br/>
             <asp:Label id="Label7" runat="server" Text="initial kilometer readings" />   &nbsp&nbsp&nbsp <asp:Textbox ID="Textbox2" runat="server" Type="number" />                                                             <br/>
         <asp:Label id="Label8" runat="server" Text="Registration Number" />           <asp:Textbox ID="Textbox3" runat="server" />        <asp:Label runat="server" ID="Label9" Text="eg. XX01YY1234" />                        <br/>
             <asp:Button ID="close" runat="server" Text="Close" /> <asp:Button ID="insert_vehicle" runat="server" OnClick="insert_vehicle_Click" Text="Insert" />
@@ -224,12 +183,7 @@
                                     <asp:Button ID="close_group_name_modal" runat="server" text="Cancel"/>
                     </asp:TableCell><asp:TableCell HorizontalAlign="Center">
                                     <asp:Button id="edit_name" runat="server" OnClick="edit_name_btn" text="Change" />
-                    </asp:TableCell></asp:TableRow></asp:table></asp:Panel>
-        
-        
-        <!-- modal extender for changing status --><!-- Change status panel -->
-        
-        <asp:Panel id="Panel3" runat="server" cssclass="modalPopup" HorizontalAlign="Center" style="display:none">
+                    </asp:TableCell></asp:TableRow></asp:table></asp:Panel><!-- modal extender for changing status --><!-- Change status panel --><asp:Panel id="Panel3" runat="server" cssclass="modalPopup" HorizontalAlign="Center" style="display:none">
 
                            
 

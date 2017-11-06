@@ -20,6 +20,27 @@ namespace car_rental
         protected void Page_Load(object sender, EventArgs e)
         {
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
+
+
+            try
+            {
+                if (Session["role"].ToString() == "user")
+                {
+                    Response.Redirect("default.aspx");
+                }
+                else if (Session["role"].ToString() == "admin")
+                {
+                    Response.Redirect("default.aspx");
+                }
+                else
+                {
+                    
+                }
+            }
+            catch
+            {
+
+            }
         }
 
         protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)

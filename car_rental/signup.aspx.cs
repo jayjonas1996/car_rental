@@ -21,6 +21,27 @@ namespace car_rental
         {
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
 
+            try
+            {
+                if (Session["role"].ToString() == "user")
+                {
+                    Response.Redirect("default.aspx");
+                }
+                else if (Session["role"].ToString() == "admin")
+                {
+                    Response.Redirect("default.aspx");
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
+            }
+            catch
+            {
+                
+            }
+
+
             DateTime today = DateTime.Now;
             int thisyear = today.Year;
             int x=thisyear-18;

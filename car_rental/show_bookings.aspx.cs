@@ -18,10 +18,31 @@ namespace car_rental
         static SqlConnection con = new SqlConnection(constr);
         static double max = 0.0;
         static int global_id = 0;
+        static string global_user_id;
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                if (Session["role"].ToString() == "user")
+                {
+                    global_user_id = Session["user_id"].ToString();
+                }
+                else if (Session["role"].ToString() == "admin")
+                {
+                    Response.Redirect("default.aspx");
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
+            }
+            catch
+            {
+                Response.Redirect("login.aspx");
+            }
+
             var cmd = new SqlCommand("select booking_id,vehicle_id,location,pickup_location,book_date,rent_date,return_date,paid_amt,cost_amt,kms,booking_status from booking_master where user_id = @user_id",con);
-            cmd.Parameters.AddWithValue("@user_id",4);
+            cmd.Parameters.AddWithValue("@user_id",global_user_id);
             var bookings = new DataTable();
             var adapter = new SqlDataAdapter(cmd);
 
@@ -128,7 +149,7 @@ namespace car_rental
                 print.Text = "Print Invoice";
                 print.Click += new EventHandler(print_btn_pressed);
 
-                if (cell_2_8.Text.ToString() != bookings.Rows[i][8].ToString())
+                if (cell_2_8.Text.ToString() != bookings.Rows[i][8].ToString() && bookings.Rows[i][10].ToString() != "CANCELLED")
                 {
                     cell_2_12.Controls.Add(pay_btn);
                 }
@@ -177,7 +198,7 @@ namespace car_rental
             var cmd = new SqlCommand("select paid_amt,cost_amt from booking_master where booking_id = @booking_id",con);
             var result = new DataTable();
             var adapter = new SqlDataAdapter(cmd);
-            cmd.Parameters.AddWithValue("@booking_id",2);
+            cmd.Parameters.AddWithValue("@booking_id",id);
 
             con.Open();
             adapter.Fill(result);
@@ -205,15 +226,37 @@ namespace car_rental
             Button pressed = (Button)sender;
             string id = pressed.ID.ToString();
             id = id.Substring(1,id.Length -1);
+            string redirectURL = "window.open(\'"+"print_invoice.aspx?id="+id+"\',\'_newtab\');";
+            ClientScript.RegisterStartupScript(this.GetType(),"opennewwindowinvoice",redirectURL,true);
         }
 
         protected void do_payment_pressed(object sender, EventArgs e)
         {
+            double paid_amount;
+            string id = display_id.Text.ToString();
+            var get = new SqlCommand("select paid_amt from booking_master where booking_id=@id",con);
+            get.Parameters.AddWithValue("@id",id);
+            
+            con.Open();
+            //paid_amount = double.Parse(get.ExecuteScalar().ToString());
+            try
+            {
+                paid_amount = double.Parse( get.ExecuteScalar().ToString() );
+            }
+            catch 
+            {
+
+                paid_amount = 0000.00;
+            }
+            con.Close();
+
+
             if(card_box.Text != "" && amount_box.Text!="" && (double.Parse(amount_box.Text.ToString()) <= max)   )
             {
-                string id = display_id.Text.ToString();
+                double paying = double.Parse(amount_box.Text.ToString())   ;
+
                 var cmd = new SqlCommand("update booking_master set paid_amt=@paid_amt,card_no=@card_no where booking_id=@booking_id",con);
-                cmd.Parameters.AddWithValue("@paid_amt",amount_box.Text.ToString());
+                cmd.Parameters.AddWithValue("@paid_amt",paying + paid_amount);
                 cmd.Parameters.AddWithValue("@booking_id",id);
                 cmd.Parameters.AddWithValue("@card_no",card_box.Text.ToString());
 

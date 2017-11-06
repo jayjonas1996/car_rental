@@ -19,8 +19,15 @@ namespace car_rental
     {
         static string constr = WebConfigurationManager.ConnectionStrings["conshivam"].ConnectionString;
         static SqlConnection con = new SqlConnection(constr);
-        static string global_location,global_group,global_pickup;
+        static string global_location,global_group,global_pickup,global_user_id;
         static DateTime global_start, global_end;
+
+        protected void LoginStatus1_LoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            Session["role"] = "null";
+            Session["user_id"] = 0;
+        }
+
         static double global_cost = 0;
 
         
@@ -29,6 +36,27 @@ namespace car_rental
         protected void Page_Load(object sender, EventArgs e)
         {
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
+
+            try
+            {
+                if (Session["role"].ToString() == "user")
+                {
+                    global_user_id = Session["user_id"].ToString();
+                }
+                else if (Session["role"].ToString() == "admin")
+                {
+                    Response.Redirect("default.aspx");
+                }
+                else
+                {
+                    Response.Redirect("login.aspx");
+                }
+            }
+            catch
+            {
+                Response.Redirect("login.aspx");
+            }
+
             string id="0";
             try
             {
@@ -232,7 +260,7 @@ namespace car_rental
             if (vehicles.Rows.Count > 0)
             {
                 var insertcmd = new SqlCommand("insert into booking_master (user_id,vehicle_id,location,pickup_location,book_date,rent_date,return_date,paid_amt,cost_amt,booking_status) values(@user_id,@vehicle_id,@location,@pickup_location,@book_date,@rent_date,@return_date,@paid_amt,@cost_amt,@booking_status)",con);
-                insertcmd.Parameters.AddWithValue("@user_id",4);
+                insertcmd.Parameters.AddWithValue("@user_id",global_user_id);
                 insertcmd.Parameters.AddWithValue("@vehicle_id",vehicles.Rows[0][0]);
                 insertcmd.Parameters.AddWithValue("@location",global_location);
                 insertcmd.Parameters.AddWithValue("@pickup_location",global_pickup);
@@ -253,8 +281,8 @@ namespace car_rental
 
                 if (inserted > 0)
                 {
-                    var getid = new SqlCommand("select min(booking_id) from booking_master where user_id = @user_id order by book_date",con);
-                    getid.Parameters.AddWithValue("@user_id",4);
+                    var getid = new SqlCommand("select max(booking_id) from booking_master where user_id = @user_id order by book_date",con);
+                    getid.Parameters.AddWithValue("@user_id",global_user_id);
 
                     con.Open();
                     int book_id = (int)cmd.ExecuteScalar();
@@ -263,7 +291,7 @@ namespace car_rental
                     var insertmsg = new SqlCommand("insert into message_master (user_id,booking_id,message,msg_date) values(@user_id,@booking_id,@message,@msg_date)",con);
                     SqlParameter today = insertmsg.Parameters.Add("@msg_date", System.Data.SqlDbType.DateTime);
                     today.Value = DateTime.Now;
-                    insertmsg.Parameters.AddWithValue("@user_id",4);
+                    insertmsg.Parameters.AddWithValue("@user_id",global_user_id);
                     insertmsg.Parameters.AddWithValue("@booking_id",book_id);
                     insertmsg.Parameters.AddWithValue("@message","Your booking is being processed");
 
@@ -280,7 +308,7 @@ namespace car_rental
             }
             else
             {
-                ClientScript.RegisterStartupScript(this.GetType(), "not boked", "alert('car was unavailable Sorry');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "not booked", "alert('car was unavailable Sorry');", true);
             }
 
         }

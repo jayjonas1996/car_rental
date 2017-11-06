@@ -26,7 +26,7 @@
         </div>
         <div id="cancel_div" visible="false" runat="server">
             <asp:Label runat="server" ID="why_cancel" Text="Why cancel booking id:"/>&nbsp<asp:Label ID="display_cncl_id" runat="server" Text="__"/>&nbsp <asp:TextBox runat="server" ID="cancel_box" Width="200px" />  <br/>
-            <asp:Button runat="server" ID="cacncel_pressed"  OnClick="do_cancel" />
+            <asp:Button runat="server" ID="cacncel_pressed" Text="Cancel"  OnClick="do_cancel" />
         </div>
         <div>
 
